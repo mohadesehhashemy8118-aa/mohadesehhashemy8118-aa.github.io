@@ -30,18 +30,11 @@
 
   @media (prefers-color-scheme: dark) {
     :root {
-      --bg: #141418;
-      --bg2: #1e1e24;
-      --bg3: #222230;
-      --text: #f0f0f5;
-      --text2: #a0a0b0;
-      --text3: #606070;
-      --border: #2a2a34;
-      --border2: #38384a;
-      --accent-light: #1a2a3f;
-      --accent-text: #8ab0e0;
-      --teal-light: #0d2e2b;
-      --teal-text: #7ed4cc;
+      --bg: #141418; --bg2: #1e1e24; --bg3: #222230;
+      --text: #f0f0f5; --text2: #a0a0b0; --text3: #606070;
+      --border: #2a2a34; --border2: #38384a;
+      --accent-light: #1a2a3f; --accent-text: #8ab0e0;
+      --teal-light: #0d2e2b; --teal-text: #7ed4cc;
     }
   }
 
@@ -54,20 +47,11 @@
     line-height: 1.7;
     direction: rtl;
   }
+  body.ltr { font-family: var(--font); direction: ltr; text-align: left; }
 
-  body.ltr {
-    font-family: var(--font);
-    direction: ltr;
-    text-align: left;
-  }
+  .container { max-width: 760px; margin: 0 auto; padding: 0 1.5rem 5rem; }
 
-  .container {
-    max-width: 760px;
-    margin: 0 auto;
-    padding: 0 1.5rem 5rem;
-  }
-
-  /* ── Nav ── */
+  /* Nav */
   .nav {
     padding: 1.25rem 0;
     margin-bottom: 2.5rem;
@@ -77,251 +61,121 @@
     justify-content: space-between;
   }
   .nav-back {
-    font-size: 13px;
-    color: var(--text2);
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    transition: color .18s;
+    font-size: 13px; color: var(--text2); text-decoration: none;
+    display: flex; align-items: center; gap: 6px; transition: color .18s;
   }
   .nav-back:hover { color: var(--text); }
   .ltr .nav-back { flex-direction: row-reverse; }
 
   .lang-toggle { display: flex; gap: 8px; }
   .lang-btn {
-    padding: 5px 14px;
-    border-radius: 20px;
-    border: 1px solid var(--border2);
-    background: transparent;
-    cursor: pointer;
-    font-size: 12px;
-    color: var(--text2);
-    font-family: inherit;
-    transition: all .18s;
+    padding: 5px 14px; border-radius: 20px;
+    border: 1px solid var(--border2); background: transparent;
+    cursor: pointer; font-size: 12px; color: var(--text2);
+    font-family: inherit; transition: all .18s;
   }
-  .lang-btn.active {
-    background: var(--bg2);
-    color: var(--text);
-    font-weight: 500;
-  }
+  .lang-btn.active { background: var(--bg2); color: var(--text); font-weight: 500; }
 
-  /* ── Hero ── */
-  .hero {
-    margin-bottom: 3rem;
-  }
-  .hero-tags {
-    display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
-    margin-bottom: 1rem;
-  }
-  .ltr .hero-tags { flex-direction: row; }
-  .tag {
-    font-size: 12px;
-    padding: 3px 12px;
-    border-radius: 20px;
-    font-weight: 500;
-  }
-  .tag-blue  { background: var(--accent-light); color: var(--accent-text); }
-  .tag-teal  { background: var(--teal-light);   color: var(--teal-text);   }
+  /* Hero */
+  .hero { margin-bottom: 2.5rem; }
+  .hero-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 1rem; }
+  .tag { font-size: 12px; padding: 3px 12px; border-radius: 20px; font-weight: 500; }
+  .tag-blue { background: var(--accent-light); color: var(--accent-text); }
+  .tag-teal { background: var(--teal-light); color: var(--teal-text); }
+  .hero-title { font-size: 32px; font-weight: 600; line-height: 1.25; margin-bottom: .75rem; }
+  .hero-subtitle { font-size: 16px; color: var(--text2); max-width: 600px; line-height: 1.75; margin-bottom: 2rem; }
 
-  .hero-title {
-    font-size: 32px;
-    font-weight: 600;
-    line-height: 1.25;
-    margin-bottom: .75rem;
-  }
-  .hero-subtitle {
-    font-size: 16px;
-    color: var(--text2);
-    max-width: 600px;
-    line-height: 1.75;
-    margin-bottom: 2rem;
-  }
-
-  /* ── Meta row ── */
+  /* Meta */
   .meta-row {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
-    gap: 1px;
-    background: var(--border);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    overflow: hidden;
-    margin-bottom: 3rem;
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 1px; background: var(--border);
+    border: 1px solid var(--border); border-radius: var(--radius);
+    overflow: hidden; margin-bottom: 3rem;
   }
-  .meta-item {
-    background: var(--bg2);
-    padding: .9rem 1.25rem;
-  }
-  .meta-label {
-    font-size: 11px;
-    text-transform: uppercase;
-    letter-spacing: .08em;
-    color: var(--text3);
-    margin-bottom: .3rem;
-  }
-  .meta-value {
-    font-size: 14px;
-    font-weight: 500;
-    color: var(--text);
-  }
+  .meta-item { background: var(--bg2); padding: .9rem 1.25rem; }
+  .meta-label { font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: var(--text3); margin-bottom: .3rem; }
+  .meta-value { font-size: 14px; font-weight: 500; color: var(--text); }
 
-  /* ── Cover image placeholder ── */
+  /* Cover */
   .cover {
-    background: linear-gradient(135deg, #1a3a5c 0%, #0d2b3e 40%, #0a4040 100%);
     border-radius: var(--radius);
-    height: 340px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 3rem;
-    position: relative;
     overflow: hidden;
+    margin-bottom: 3rem;
+    text-align: center;
+    background: #020d1a;
   }
-  .cover-whale {
-    font-size: 80px;
-    opacity: .6;
-    animation: float 4s ease-in-out infinite;
+  .cover img {
+    width: 100%;
+    max-height: 420px;
+    object-fit: cover;
+    object-position: top;
+    display: block;
   }
-  @keyframes float {
-    0%, 100% { transform: translateY(0px); }
-    50% { transform: translateY(-12px); }
-  }
-  .cover-label {
-    position: absolute;
-    bottom: 1.25rem;
-    font-size: 12px;
-    color: rgba(255,255,255,.45);
-  }
-  .ltr .cover-label { right: 1.25rem; }
-  body:not(.ltr) .cover-label { left: 1.25rem; }
 
-  /* ── Sections ── */
+  /* Divider & sections */
   .divider { height: 1px; background: var(--border); margin: 2.5rem 0; }
-
   .section { margin-bottom: 3rem; }
-
-  .section-num {
-    font-size: 11px;
-    letter-spacing: .1em;
-    text-transform: uppercase;
-    color: var(--text3);
-    margin-bottom: .5rem;
-  }
-  .section-title {
-    font-size: 22px;
-    font-weight: 600;
-    margin-bottom: 1rem;
-    line-height: 1.3;
-  }
-  .section-body {
-    font-size: 15px;
-    color: var(--text2);
-    line-height: 1.8;
-  }
+  .section-num { font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--text3); margin-bottom: .5rem; }
+  .section-title { font-size: 22px; font-weight: 600; margin-bottom: 1rem; line-height: 1.3; }
+  .section-body { font-size: 15px; color: var(--text2); line-height: 1.8; }
   .section-body p { margin-bottom: 1rem; }
   .section-body p:last-child { margin-bottom: 0; }
 
-  /* ── Callout ── */
+  /* Callout */
   .callout {
     background: var(--teal-light);
     border-right: 3px solid var(--teal);
     border-radius: var(--radius-sm);
     padding: 1rem 1.25rem;
     margin: 1.5rem 0;
-    font-size: 15px;
-    color: var(--teal-text);
-    line-height: 1.7;
+    font-size: 15px; color: var(--teal-text); line-height: 1.7;
   }
   .ltr .callout { border-right: none; border-left: 3px solid var(--teal); }
 
-  /* ── Feature list ── */
-  .features {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    margin: 1.5rem 0;
-  }
-  .feature-item {
-    background: var(--bg2);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-sm);
-    padding: 1rem 1.25rem;
-  }
-  .feature-title {
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--text);
-    margin-bottom: .3rem;
-  }
-  .feature-desc {
-    font-size: 14px;
-    color: var(--text2);
-    line-height: 1.65;
-  }
+  /* Feature list */
+  .features { display: flex; flex-direction: column; gap: 12px; margin: 1.5rem 0; }
+  .feature-item { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 1rem 1.25rem; }
+  .feature-title { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: .3rem; }
+  .feature-desc { font-size: 14px; color: var(--text2); line-height: 1.65; }
 
-  /* ── Image placeholder ── */
-  .img-placeholder {
-    background: var(--bg3);
-    border: 1.5px dashed var(--border2);
-    border-radius: var(--radius);
-    height: 260px;
+  /* Screenshot images */
+  .screen-wrap {
     display: flex;
-    flex-direction: column;
-    align-items: center;
     justify-content: center;
-    gap: 8px;
-    margin: 1.5rem 0;
-    color: var(--text3);
-    font-size: 13px;
-  }
-  .img-placeholder .icon { font-size: 28px; opacity: .5; }
-
-  .img-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-    margin: 1.5rem 0;
-  }
-  .img-row .img-placeholder { height: 200px; margin: 0; }
-
-  /* ── Nav bottom ── */
-  .nav-bottom {
-    margin-top: 4rem;
-    padding-top: 2rem;
-    border-top: 1px solid var(--border);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    gap: 16px;
+    margin: 2rem 0;
     flex-wrap: wrap;
-    gap: 1rem;
+  }
+  .screen-img {
+    width: 260px;
+    border-radius: 20px;
+    box-shadow: 0 8px 32px rgba(0,0,0,.12);
+    display: block;
+    border: 1px solid var(--border);
+  }
+
+  /* Nav bottom */
+  .nav-bottom {
+    margin-top: 4rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;
   }
   .nav-bottom a {
-    font-size: 14px;
-    color: var(--text2);
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    padding: 8px 16px;
-    border: 1px solid var(--border2);
-    border-radius: var(--radius-sm);
-    transition: all .18s;
+    font-size: 14px; color: var(--text2); text-decoration: none;
+    display: flex; align-items: center; gap: 6px;
+    padding: 8px 16px; border: 1px solid var(--border2);
+    border-radius: var(--radius-sm); transition: all .18s;
   }
   .nav-bottom a:hover { background: var(--bg2); color: var(--text); }
 
   @media (max-width: 480px) {
     .hero-title { font-size: 24px; }
-    .img-row { grid-template-columns: 1fr; }
+    .screen-img { width: 100%; max-width: 300px; }
     .meta-row { grid-template-columns: 1fr 1fr; }
   }
 </style>
 </head>
 <body>
 <div class="container">
-
   <nav class="nav">
     <a class="nav-back" href="../index.html" id="navBack">← بازگشت به پورتفولیو</a>
     <div class="lang-toggle">
@@ -329,172 +183,152 @@
       <button class="lang-btn" onclick="setLang('en')">English</button>
     </div>
   </nav>
-
   <div id="content"></div>
-
 </div>
 
 <script>
+const IMG = 'img/avaye-wal/';
+
 const c = {
   fa: {
-    dir: 'rtl', cls: '',
+    dir:'rtl', cls:'',
     navBack: '← بازگشت به پورتفولیو',
     tags: [
-      { text: 'کیس استادی', cls: 'tag-blue' },
-      { text: 'سلامت روان', cls: 'tag-teal' },
+      { text:'کیس استادی', cls:'tag-blue' },
+      { text:'سلامت روان', cls:'tag-teal' },
     ],
     title: 'آوای وال',
     subtitle: 'اپلیکیشن موبایلی برای مدیریت اضطراب و سلامت روان — با هویتی الهام‌گرفته از دنیای وال‌ها',
     meta: [
-      { label: 'نوع پروژه', value: 'کیس استادی' },
-      { label: 'حوزه', value: 'UI/UX Design' },
-      { label: 'ابزار', value: 'Figma' },
-      { label: 'سال', value: '۱۴۰۱' },
+      { label:'نوع پروژه', value:'کیس استادی' },
+      { label:'حوزه', value:'UI/UX Design' },
+      { label:'ابزار', value:'Figma' },
+      { label:'سال', value:'۱۴۰۱' },
     ],
-    coverLabel: 'تصویر اسپلش اسکرین',
     sections: [
       {
-        num: '۰۱',
-        title: 'داستان برند',
-        body: `<p>«آوای وال» یک اپلیکیشن در حوزه سلامت روان است که با هدف کاهش استرس و افزایش تمرکز طراحی شده است. نام و هویت بصری این اپلیکیشن از طبیعت وال‌ها الهام گرفته است.</p>`,
-        callout: 'وال‌ها برای تنفس مجبورند هر چند وقت یک‌بار از عمق اقیانوس به سطح آب بیایند. این حرکت نماد تلاش‌ها و دستیابی‌های انسان در مسیر آرامش روان است — فرآیندی که نه خطی است و نه آسان.',
-        after: `<p>در صفحه اول (Onboarding)، تصویری از والی نمایش داده می‌شود که در تلاش مداوم برای رسیدن به آرامش مطلق در عمق اقیانوس است. حرکت لطیف وال در آب، تجربه‌ای آرامش‌بخش و الهام‌بخش برای کاربر رقم می‌زند تا اپلیکیشن را نه به عنوان یک ابزار خشک، بلکه به عنوان یک پناهگاه امن در نظر بگیرد.</p>`,
-        img: { label: 'اسپلش اسکرین و صفحه Onboarding', rows: false }
+        num:'۰۱', title:'داستان برند',
+        body:`<p>«آوای وال» یک اپلیکیشن در حوزه سلامت روان است که با هدف کاهش استرس و افزایش تمرکز طراحی شده است. نام و هویت بصری این اپلیکیشن از طبیعت وال‌ها الهام گرفته است.</p>`,
+        callout:'وال‌ها برای تنفس مجبورند هر چند وقت یک‌بار از عمق اقیانوس به سطح آب بیایند. این حرکت نماد تلاش‌ها و دستیابی‌های انسان در مسیر آرامش روان است — فرآیندی که نه خطی است و نه آسان.',
+        after:`<p>در صفحه اول، تصویری از والی نمایش داده می‌شود که در تلاش مداوم برای رسیدن به آرامش مطلق در عمق اقیانوس است. حرکت لطیف وال در آب، تجربه‌ای آرامش‌بخش برای کاربر رقم می‌زند تا اپلیکیشن را نه به عنوان یک ابزار خشک، بلکه به عنوان یک پناهگاه امن در نظر بگیرد.</p>`,
+        imgs: ['01-splash.png'],
       },
       {
-        num: '۰۲',
-        title: 'فرآیند ورود و شخصی‌سازی',
-        body: `<p>در حوزه سلامت روان، «یک سایز برای همه» جواب نمی‌دهد. رویکرد ما در طراحی Onboarding، دریافت حداقل اطلاعات برای ارائه بیشترین کمک بود.</p>`,
+        num:'۰۲', title:'فرآیند ورود و شخصی‌سازی',
+        body:`<p>در حوزه سلامت روان، «یک سایز برای همه» جواب نمی‌دهد. رویکرد ما در طراحی Onboarding، دریافت حداقل اطلاعات برای ارائه بیشترین کمک بود.</p>`,
         features: [
-          { title: 'جریان منطقی سوالات', desc: 'فرآیند پرسش‌گری به گونه‌ای طراحی شده که ابتدا با سوالات عمومی شروع می‌شود و به تدریج به سوالات حساس‌تر مانند میزان استرس فعلی می‌رسد. این کار از ایجاد احساس ناراحتی در کاربر جلوگیری می‌کند.' },
-          { title: 'اقدام نهایی بدون اجبار', desc: 'پس از تعیین سطح استرس، کاربر با گزینه‌های «ورود» یا «ثبت‌نام» مواجه می‌شود تا بدون احساس اجبار، به محتوای اصلی دسترسی پیدا کند.' },
+          { title:'جریان منطقی سوالات', desc:'فرآیند پرسش‌گری به گونه‌ای طراحی شده که ابتدا با سوالات عمومی شروع می‌شود و به تدریج به سوالات حساس‌تر مانند میزان استرس فعلی می‌رسد.' },
+          { title:'اقدام نهایی بدون اجبار', desc:'پس از تعیین سطح استرس، کاربر با گزینه‌های «ورود» یا «ثبت‌نام» مواجه می‌شود تا بدون احساس اجبار، به محتوا دسترسی پیدا کند.' },
         ],
-        img: { label: 'صفحات فرم Onboarding', rows: true }
+        imgs: ['02-onboarding1.png', '02-onboarding2.png'],
       },
       {
-        num: '۰۳',
-        title: 'داشبورد و مدیریت احساسات',
-        body: `<p>صفحه اصلی، مرکز فرماندهی کاربر برای مدیریت روزانه است. هدف طراحی این صفحه، جلوگیری از بار شناختی (Cognitive Load) بود.</p>`,
+        num:'۰۳', title:'داشبورد و مدیریت احساسات',
+        body:`<p>صفحه اصلی، مرکز فرماندهی کاربر برای مدیریت روزانه است. هدف طراحی این صفحه، جلوگیری از بار شناختی (Cognitive Load) بود.</p>`,
         features: [
-          { title: 'نمای کلی روزانه', desc: 'نمایش وضعیت روزانه همراه با جملات انگیزشی کوتاه برای ایجاد لحظه‌ای مثبت در شروع استفاده.' },
-          { title: 'تراز هفتگی (Weekly Balance)', desc: 'با اسکرول کردن، کاربر می‌تواند روند احساسات خود را در طول هفته به صورت بصری مشاهده کند. این قابلیت (Gamification خفیف) به کاربر انگیزه می‌دهد تا روند پیشرفت خود را ببیند.' },
-          { title: 'دسترسی سریع (FAB Button)', desc: 'دکمه «+» در نوار ناوبری پایین، سریع‌ترین مسیر برای دسترسی به دو هسته اصلی اپلیکیشن: «ثبت احساس» و «ایجاد هدف» است.' },
+          { title:'نمای کلی روزانه', desc:'نمایش وضعیت روزانه همراه با جملات انگیزشی کوتاه برای ایجاد لحظه‌ای مثبت در شروع استفاده.' },
+          { title:'تراز هفتگی', desc:'با اسکرول کردن، کاربر می‌تواند روند احساسات خود را در طول هفته به صورت بصری مشاهده کند.' },
+          { title:'دسترسی سریع (FAB Button)', desc:'دکمه «+» در نوار ناوبری پایین، سریع‌ترین مسیر برای دسترسی به «ثبت احساس» و «ایجاد هدف» است.' },
         ],
-        img: { label: 'صفحه اصلی (Home) و تراز هفتگی', rows: false }
+        imgs: ['03-home.png'],
       },
       {
-        num: '۰۴',
-        title: 'ثبت احساسات — نوآوری در ورود داده',
-        body: `<p>این صفحه خروجی مستقیم تحلیل رقبا و درک نیاز کاربر است. در بررسی اپلیکیشن‌های رقیب مانند Calm و Headspace، متوجه شدیم که اکثراً از روش‌های سنتی (تایپ متن یا انتخاب ایموجی) استفاده می‌کنند.</p>`,
-        callout: 'راه‌حل: افزودن قابلیت ضبط صوتی به ثبت احساسات. کاربران می‌توانند به جای تایپ، احساسات یا تکنیک‌های مدیتیشن شخصی خود را ضبط کنند و بعداً به آن‌ها گوش دهند.',
-        after: '<p>در کنار ثبت احساس، کاربر می‌تواند یک «هدف مختص به آن احساس» را تعیین کند تا فرآیند بهبود هدفمندتر شود.</p>',
-        img: { label: 'صفحه ثبت احساس و دکمه ضبط صدا', rows: true }
+        num:'۰۴', title:'ثبت احساسات — نوآوری در ورود داده',
+        body:`<p>این صفحه خروجی مستقیم تحلیل رقبا و درک نیاز کاربر است. در بررسی اپلیکیشن‌های رقیب مانند Calm و Headspace، متوجه شدم که اکثراً از روش‌های سنتی (تایپ متن یا انتخاب ایموجی) استفاده می‌کنند.</p>`,
+        callout:'راه‌حل: افزودن قابلیت ضبط صوتی به ثبت احساسات. کاربران می‌توانند به جای تایپ، احساسات یا تکنیک‌های مدیتیشن شخصی خود را ضبط کنند و بعداً به آن‌ها گوش دهند.',
+        after:`<p>در کنار ثبت احساس، کاربر می‌تواند یک «هدف مختص به آن احساس» را تعیین کند تا فرآیند بهبود هدفمندتر شود.</p>`,
+        imgs: ['04-emotion.png'],
       },
       {
-        num: '۰۵',
-        title: 'موسیقی درمانی',
-        body: `<p>موسیقی ستون فقرات اپلیکیشن‌های آرام‌بخش است. با توجه به تحقیقات علمی مبنی بر تاثیر موسیقی بر کاهش ضربان قلب و فشار خون، این بخش به عنوان یک ماژول مستقل و با دسترسی آسان طراحی شد.</p><p>رابط کاربری این بخش به گونه‌ای طراحی شد که کاربر بتواند به سرعت بین دسته‌بندی‌های مختلف (ملودی‌های نرم، صدای طبیعت، نواهای مدیتیشن) جابجا شود و ترکیب‌های شخصی برای خود بسازد.</p>`,
-        img: { label: 'صفحه پلیر موسیقی', rows: false }
+        num:'۰۵', title:'موسیقی درمانی',
+        body:`<p>موسیقی ستون فقرات اپلیکیشن‌های آرام‌بخش است. با توجه به تحقیقات علمی مبنی بر تاثیر موسیقی بر کاهش ضربان قلب و فشار خون، این بخش به عنوان یک ماژول مستقل طراحی شد.</p><p>رابط کاربری این بخش به گونه‌ای طراحی شد که کاربر بتواند به سرعت بین دسته‌بندی‌های مختلف جابجا شود و ترکیب‌های شخصی برای خود بسازد.</p>`,
+        imgs: ['05-music.png'],
       },
     ],
-    imgPlaceholder: 'جای تصویر',
-    imgHint: 'اسکرین‌شات از فیگما اضافه کن',
-    navBack2: '← بازگشت به پورتفولیو',
-    navNext: 'پروژه بعدی ←',
+    navBack2:'← بازگشت به پورتفولیو',
+    navNext:'پروژه بعدی ←',
   },
   en: {
-    dir: 'ltr', cls: 'ltr',
-    navBack: '← Back to portfolio',
-    tags: [
-      { text: 'Case Study', cls: 'tag-blue' },
-      { text: 'Mental Health', cls: 'tag-teal' },
+    dir:'ltr', cls:'ltr',
+    navBack:'← Back to portfolio',
+    tags:[
+      { text:'Case Study', cls:'tag-blue' },
+      { text:'Mental Health', cls:'tag-teal' },
     ],
-    title: 'Avaye Wal',
-    subtitle: 'A mobile app for anxiety and mental health management — with a visual identity inspired by the world of whales.',
-    meta: [
-      { label: 'Type', value: 'Case Study' },
-      { label: 'Domain', value: 'UI/UX Design' },
-      { label: 'Tool', value: 'Figma' },
-      { label: 'Year', value: '2022' },
+    title:'Avaye Wal',
+    subtitle:'A mobile app for anxiety and mental health management — with a visual identity inspired by the world of whales.',
+    meta:[
+      { label:'Type', value:'Case Study' },
+      { label:'Domain', value:'UI/UX Design' },
+      { label:'Tool', value:'Figma' },
+      { label:'Year', value:'2022' },
     ],
-    coverLabel: 'Splash screen image',
-    sections: [
+    sections:[
       {
-        num: '01',
-        title: 'Brand Story',
-        body: `<p>Avaye Wal is a mental health app designed to reduce stress and improve focus. Its name and visual identity are inspired by the nature of whales.</p>`,
-        callout: 'Whales must periodically rise from the ocean depths to breathe at the surface. This movement symbolizes the human struggle and achievement on the path to inner calm — a process that is neither linear nor easy.',
-        after: `<p>The onboarding screen shows a whale in constant pursuit of stillness in the ocean's depths. The whale's gentle movement through water creates a soothing, inspiring experience — framing the app not as a dry tool, but as a safe haven.</p>`,
-        img: { label: 'Splash screen & Onboarding', rows: false }
+        num:'01', title:'Brand Story',
+        body:`<p>Avaye Wal is a mental health app designed to reduce stress and improve focus. Its name and visual identity are inspired by the nature of whales.</p>`,
+        callout:'Whales must periodically rise from the ocean depths to breathe at the surface. This movement symbolizes the human struggle on the path to inner calm — a process that is neither linear nor easy.',
+        after:`<p>The onboarding screen shows a whale in constant pursuit of stillness in the ocean's depths. Its gentle movement frames the app not as a dry tool, but as a safe haven.</p>`,
+        imgs:['01-splash.png'],
       },
       {
-        num: '02',
-        title: 'Onboarding & Personalization',
-        body: `<p>In mental health, one-size-fits-all doesn't work. Our onboarding approach was to collect minimum information while delivering maximum value.</p>`,
-        features: [
-          { title: 'Logical question flow', desc: 'The questionnaire is structured to start with general questions and gradually move toward more sensitive ones (like current stress level), preventing the user from feeling pressured.' },
-          { title: 'Frictionless final step', desc: 'After setting their stress level, users are presented with "Sign In" or "Register" options — giving them access to core content without feeling forced.' },
+        num:'02', title:'Onboarding & Personalization',
+        body:`<p>In mental health, one-size-fits-all doesn't work. Our onboarding approach was to collect minimum information while delivering maximum value.</p>`,
+        features:[
+          { title:'Logical question flow', desc:'The questionnaire starts with general questions and gradually moves toward more sensitive ones (like current stress level), preventing the user from feeling overwhelmed.' },
+          { title:'Frictionless final step', desc:'After setting their stress level, users see "Sign In" or "Register" options — giving access to core content without feeling forced.' },
         ],
-        img: { label: 'Onboarding form screens', rows: true }
+        imgs:['02-onboarding1.png','02-onboarding2.png'],
       },
       {
-        num: '03',
-        title: 'Home & Emotion Tracking',
-        body: `<p>The home screen is the user's command center for daily emotional management. The design goal was to minimize cognitive load.</p>`,
-        features: [
-          { title: 'Daily overview', desc: 'Displays daily status with short motivational quotes to create a positive moment at the start of each session.' },
-          { title: 'Weekly Balance', desc: 'Users can scroll to view their emotional trends over the week in a visual format — a light gamification element that motivates continued engagement.' },
-          { title: 'Quick access (FAB Button)', desc: 'The "+" button in the bottom navigation provides the fastest path to the app\'s two core functions: "Log Emotion" and "Create Goal".' },
+        num:'03', title:'Home & Emotion Tracking',
+        body:`<p>The home screen is the user's command center for daily emotional management. The design goal was to minimize cognitive load.</p>`,
+        features:[
+          { title:'Daily overview', desc:'Displays daily status with short motivational quotes to create a positive moment at the start of each session.' },
+          { title:'Weekly Balance', desc:'Users scroll to view their emotional trends over the week — a light gamification element that motivates continued use.' },
+          { title:'Quick access (FAB Button)', desc:'The "+" button in the bottom navigation provides the fastest path to "Log Emotion" and "Create Goal".' },
         ],
-        img: { label: 'Home screen & Weekly Balance', rows: false }
+        imgs:['03-home.png'],
       },
       {
-        num: '04',
-        title: 'Emotion Logging — Rethinking Input',
-        body: `<p>This screen is the direct output of competitor analysis and user need research. Reviewing apps like Calm and Headspace, I found that most rely on traditional methods (typing or emoji selection).</p>`,
-        callout: 'Solution: Adding voice recording to emotion logging. Users can record their feelings or personal meditation techniques instead of typing, then replay them later.',
-        after: '<p>Alongside logging an emotion, users can set a "goal tied to that feeling" — making the improvement process more intentional.</p>',
-        img: { label: 'Emotion logging screen & voice button', rows: true }
+        num:'04', title:'Emotion Logging — Rethinking Input',
+        body:`<p>This screen is the direct output of competitor analysis. Reviewing apps like Calm and Headspace, I found that most rely on traditional methods (typing or emoji selection).</p>`,
+        callout:'Solution: Adding voice recording to emotion logging. Users can record their feelings or personal meditation techniques instead of typing, then replay them later.',
+        after:`<p>Alongside logging an emotion, users can set a "goal tied to that feeling" — making the improvement process more intentional.</p>`,
+        imgs:['04-emotion.png'],
       },
       {
-        num: '05',
-        title: 'Music Therapy',
-        body: `<p>Music is the backbone of relaxation apps. Based on scientific research showing music's effect on reducing heart rate and blood pressure, this section was designed as a standalone module with easy access.</p><p>The UI was designed to let users quickly browse categories (soft melodies, nature sounds, meditation tones) and build personal combinations for a complete relaxation experience.</p>`,
-        img: { label: 'Music player screen', rows: false }
+        num:'05', title:'Music Therapy',
+        body:`<p>Music is the backbone of relaxation apps. Based on research on music's effect on heart rate and blood pressure, this section was designed as a standalone module with easy access.</p><p>The UI lets users quickly browse categories and build personal combinations for a complete relaxation experience.</p>`,
+        imgs:['05-music.png'],
       },
     ],
-    imgPlaceholder: 'Image placeholder',
-    imgHint: 'Add Figma screenshot here',
-    navBack2: '← Back to portfolio',
-    navNext: 'Next project →',
+    navBack2:'← Back to portfolio',
+    navNext:'Next project →',
   }
 };
 
-function renderSection(s, d) {
-  let html = `
-    <div class="section">
-      <div class="section-num">${s.num}</div>
-      <div class="section-title">${s.title}</div>
-      <div class="section-body">${s.body}</div>`;
+function renderSection(s) {
+  let html = `<div class="section">
+    <div class="section-num">${s.num}</div>
+    <div class="section-title">${s.title}</div>
+    <div class="section-body">${s.body}</div>`;
 
   if (s.callout) html += `<div class="callout">${s.callout}</div>`;
   if (s.after)   html += `<div class="section-body">${s.after}</div>`;
 
   if (s.features) {
-    html += `<div class="features">` + s.features.map(f => `
-      <div class="feature-item">
+    html += `<div class="features">` + s.features.map(f =>
+      `<div class="feature-item">
         <div class="feature-title">${f.title}</div>
         <div class="feature-desc">${f.desc}</div>
       </div>`).join('') + `</div>`;
   }
 
-  if (s.img.rows) {
-    html += `<div class="img-row">
-      <div class="img-placeholder"><div class="icon">🖼</div><div>${d.imgPlaceholder}</div><div style="font-size:11px;margin-top:2px;opacity:.7">${d.imgHint}</div></div>
-      <div class="img-placeholder"><div class="icon">🖼</div><div>${d.imgPlaceholder}</div><div style="font-size:11px;margin-top:2px;opacity:.7">${d.imgHint}</div></div>
-    </div>`;
-  } else {
-    html += `<div class="img-placeholder"><div class="icon">🖼</div><div>${s.img.label}</div><div style="font-size:11px;margin-top:2px;opacity:.7">${d.imgHint}</div></div>`;
+  if (s.imgs && s.imgs.length) {
+    html += `<div class="screen-wrap">` +
+      s.imgs.map(img => `<img class="screen-img" src="${IMG}${img}" alt="${s.title}" loading="lazy">`).join('') +
+      `</div>`;
   }
 
   html += `</div><div class="divider"></div>`;
@@ -508,12 +342,12 @@ function setLang(lang) {
   document.body.className = d.cls;
   document.querySelector('#navBack').textContent = d.navBack;
   document.querySelectorAll('.lang-btn').forEach(b => {
-    b.classList.toggle('active', b.textContent.trim() === (lang === 'fa' ? 'فارسی' : 'English'));
+    b.classList.toggle('active', b.textContent.trim() === (lang==='fa'?'فارسی':'English'));
   });
 
-  const tagHtml = d.tags.map(t => `<span class="tag ${t.cls}">${t.text}</span>`).join('');
-  const metaHtml = d.meta.map(m => `<div class="meta-item"><div class="meta-label">${m.label}</div><div class="meta-value">${m.value}</div></div>`).join('');
-  const sectionsHtml = d.sections.map(s => renderSection(s, d)).join('');
+  const tagHtml = d.tags.map(t=>`<span class="tag ${t.cls}">${t.text}</span>`).join('');
+  const metaHtml = d.meta.map(m=>`<div class="meta-item"><div class="meta-label">${m.label}</div><div class="meta-value">${m.value}</div></div>`).join('');
+  const sectionsHtml = d.sections.map(renderSection).join('');
 
   document.getElementById('content').innerHTML = `
     <div class="hero">
@@ -521,18 +355,12 @@ function setLang(lang) {
       <div class="hero-title">${d.title}</div>
       <div class="hero-subtitle">${d.subtitle}</div>
     </div>
-
     <div class="meta-row">${metaHtml}</div>
-
-<div class="cover">
-  <img src="https://github.com/mohadesehhashemy8118-aa/mohadesehhashemy8118-aa.github.io/projects/img/avaye-wal/01-splash.png" alt="تصویر وال" style="width:100%; height:100%; object-fit:cover; position:absolute; top:0; left:0;">
-  <div class="cover-label">${d.coverLabel}</div>
-</div>
-
+    <div class="cover">
+      <img src="${IMG}01-splash.png" alt="Avaye Wal splash screen">
+    </div>
     <div class="divider"></div>
-
     ${sectionsHtml}
-
     <div class="nav-bottom">
       <a href="../index.html">${d.navBack2}</a>
       <a href="#">${d.navNext}</a>
