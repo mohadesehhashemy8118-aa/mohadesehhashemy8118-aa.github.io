@@ -1,3 +1,307 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mohadeseh Hashemi — UI/UX Designer</title>
+<style>
+  /* ── Reset ── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  /* ── Fonts (system stack — no external request needed) ── */
+  :root {
+    --font: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    --font-fa: 'Vazirmatn', 'Segoe UI', Tahoma, sans-serif;
+
+    --bg: #ffffff;
+    --bg2: #f7f7fa;
+    --text: #1a1a1e;
+    --text2: #5a5a6a;
+    --text3: #9898a8;
+    --border: #e8e8ef;
+    --border2: #d0d0dc;
+    --accent: #4a4e8c;
+    --accent-bg: #eeedfe;
+    --accent-text: #3c3489;
+    --green-bg: #e1f5ee;
+    --green-text: #085041;
+    --amber-bg: #faeeda;
+    --amber-text: #633806;
+    --radius: 10px;
+    --radius-sm: 6px;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #141418;
+      --bg2: #1e1e24;
+      --text: #f0f0f5;
+      --text2: #a0a0b0;
+      --text3: #606070;
+      --border: #2a2a34;
+      --border2: #38384a;
+      --accent: #7a7fc8;
+      --accent-bg: #26215c;
+      --accent-text: #cecbf6;
+      --green-bg: #04342c;
+      --green-text: #9fe1cb;
+      --amber-bg: #412402;
+      --amber-text: #fac775;
+    }
+  }
+
+  html { font-size: 16px; scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--font);
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    padding: 0 1.5rem;
+  }
+
+  body.rtl {
+    font-family: var(--font-fa);
+    direction: rtl;
+    text-align: right;
+  }
+
+  /* ── Layout ── */
+  .container {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 3rem 0 4rem;
+  }
+
+  /* ── Language toggle ── */
+  .lang-toggle {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 3rem;
+  }
+  .rtl .lang-toggle { flex-direction: row-reverse; }
+
+  .lang-btn {
+    padding: 6px 18px;
+    border-radius: 20px;
+    border: 1px solid var(--border2);
+    background: transparent;
+    cursor: pointer;
+    font-size: 13px;
+    color: var(--text2);
+    font-family: inherit;
+    transition: all .18s;
+  }
+  .lang-btn.active {
+    background: var(--bg2);
+    color: var(--text);
+    border-color: var(--border2);
+    font-weight: 500;
+  }
+  .lang-btn:hover { border-color: var(--accent); color: var(--text); }
+
+  /* ── Hero ── */
+  .hero { margin-bottom: 3rem; }
+  .hero-label {
+    font-size: 12px;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--text3);
+    margin-bottom: .6rem;
+  }
+  .hero-name {
+    font-size: 36px;
+    font-weight: 500;
+    line-height: 1.15;
+    margin-bottom: .75rem;
+  }
+  .hero-bio {
+    font-size: 15px;
+    color: var(--text2);
+    line-height: 1.75;
+    max-width: 560px;
+    margin-bottom: 1.5rem;
+  }
+  .hero-links {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .rtl .hero-links { flex-direction: row-reverse; }
+  .hero-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 14px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    font-size: 13px;
+    color: var(--text2);
+    text-decoration: none;
+    transition: all .18s;
+  }
+  .hero-link:hover {
+    border-color: var(--border2);
+    color: var(--text);
+    background: var(--bg2);
+  }
+
+  /* ── Divider ── */
+  .divider {
+    height: 1px;
+    background: var(--border);
+    margin: 2.5rem 0;
+  }
+
+  /* ── Section label ── */
+  .section-label {
+    font-size: 11px;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--text3);
+    margin-bottom: 1.25rem;
+  }
+
+  /* ── Project cards ── */
+  .projects { display: flex; flex-direction: column; gap: 12px; }
+
+  .project-card {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.25rem 1.5rem;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    transition: border-color .18s;
+  }
+  .project-card:hover { border-color: var(--border2); }
+
+  .project-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: .5rem;
+  }
+  .rtl .project-top { flex-direction: row-reverse; }
+
+  .project-title {
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--text);
+  }
+  .project-tag {
+    font-size: 11px;
+    padding: 3px 10px;
+    border-radius: 20px;
+    white-space: nowrap;
+    flex-shrink: 0;
+    font-weight: 500;
+  }
+  .tag-ux    { background: var(--accent-bg);  color: var(--accent-text); }
+  .tag-re    { background: var(--green-bg);   color: var(--green-text);  }
+  .tag-st    { background: var(--amber-bg);   color: var(--amber-text);  }
+
+  .project-desc {
+    font-size: 14px;
+    color: var(--text2);
+    line-height: 1.65;
+    margin-bottom: .75rem;
+  }
+  .project-meta {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .rtl .project-meta { flex-direction: row-reverse; }
+  .project-meta span {
+    font-size: 12px;
+    color: var(--text3);
+  }
+
+  /* ── Skills ── */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 8px;
+  }
+  .skill-item {
+    background: var(--bg2);
+    border-radius: var(--radius-sm);
+    padding: 8px 14px;
+    font-size: 13px;
+    color: var(--text2);
+  }
+
+  /* ── Contact ── */
+  .contact-row { display: flex; gap: 10px; flex-wrap: wrap; }
+  .rtl .contact-row { flex-direction: row-reverse; }
+  .contact-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 8px 16px;
+    border: 1px solid var(--border2);
+    border-radius: var(--radius-sm);
+    font-size: 13px;
+    color: var(--text2);
+    background: transparent;
+    cursor: pointer;
+    font-family: inherit;
+    text-decoration: none;
+    transition: all .18s;
+  }
+  .contact-btn:hover { background: var(--bg2); color: var(--text); }
+
+  /* ── Footer ── */
+  .footer {
+    margin-top: 3rem;
+    font-size: 12px;
+    color: var(--text3);
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 480px) {
+    .hero-name { font-size: 28px; }
+    .project-top { flex-direction: column; gap: .4rem; }
+    .rtl .project-top { flex-direction: column; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <div class="lang-toggle">
+    <button class="lang-btn active" onclick="setLang('en')">English</button>
+    <button class="lang-btn" onclick="setLang('fa')">فارسی</button>
+  </div>
+
+  <!-- Hero -->
+  <section class="hero" id="hero"></section>
+
+  <div class="divider"></div>
+
+  <!-- Projects -->
+  <div class="section-label" id="projLabel"></div>
+  <div class="projects" id="projects"></div>
+
+  <div class="divider"></div>
+
+  <!-- Skills -->
+  <div class="section-label" id="skillsLabel"></div>
+  <div class="skills-grid" id="skills"></div>
+
+  <div class="divider"></div>
+
+  <!-- Contact -->
+  <div class="section-label" id="contactLabel"></div>
+  <div class="contact-row" id="contact"></div>
+
+  <div class="footer" id="footer"></div>
+
+</div>
+
 <script>
 /* ─── Content ─── */
 const content = {
@@ -80,25 +384,18 @@ function setLang(lang) {
     </div>`;
 
   document.getElementById('projLabel').textContent = d.projLabel;
-  document.getElementById('projects').innerHTML = d.projects.map(p => {
-    let link = `projects/${slugify(p.title)}.html`;
-    // فقط برای پروژه مراقبت از سالمندان لینک را تغییر بده
-    if (p.title === 'Elderly Care App' || p.title === 'مراقبت از سالمندان') {
-      link = 'projects/elderly-care.html';
-    }
-    return `
-      <a class="project-card" href="${link}">
-        <div class="project-top">
-          <div class="project-title">${p.title}</div>
-          <span class="project-tag ${p.tagClass}">${p.tag}</span>
-        </div>
-        <div class="project-desc">${p.desc}</div>
-        <div class="project-meta">
-          <span>${p.year}</span>
-          <span>${p.type}</span>
-        </div>
-      </a>`;
-  }).join('');
+  document.getElementById('projects').innerHTML = d.projects.map(p => `
+    <a class="project-card" href="projects/${slugify(p.title)}.html">
+      <div class="project-top">
+        <div class="project-title">${p.title}</div>
+        <span class="project-tag ${p.tagClass}">${p.tag}</span>
+      </div>
+      <div class="project-desc">${p.desc}</div>
+      <div class="project-meta">
+        <span>${p.year}</span>
+        <span>${p.type}</span>
+      </div>
+    </a>`).join('');
 
   document.getElementById('skillsLabel').textContent = d.skillsLabel;
   document.getElementById('skills').innerHTML = d.skills.map(s => `<div class="skill-item">${s}</div>`).join('');
@@ -116,3 +413,5 @@ function slugify(str) {
 
 setLang('en');
 </script>
+</body>
+</html>
