@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SPMS — کیس استادی | Mohadeseh Hashemi</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #ffffff; --bg2: #f5f7fb; --bg3: #eef1f8;
+    --text: #1a1a1e; --text2: #5a5a6a; --text3: #9898a8;
+    --border: #e4e8f0; --border2: #cdd4e2;
+    --blue: #3b7dd8; --blue-light: #e8f0fc; --blue-text: #2056a0;
+    --navy: #1e3a6e; --navy-light: #e8ecf5; --navy-text: #1e3a6e;
+    --radius: 12px; --radius-sm: 8px;
+    --font: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    --font-fa: 'Vazirmatn', 'Segoe UI', Tahoma, sans-serif;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #14161c; --bg2: #1c1f28; --bg3: #20242e;
+      --text: #f0f1f5; --text2: #a8acb8; --text3: #686c78;
+      --border: #2a2e3a; --border2: #383c4a;
+      --blue-light: #182840; --blue-text: #8ab4e8;
+      --navy-light: #182030; --navy-text: #a0b8e0;
+    }
+  }
+
+  html { font-size: 16px; scroll-behavior: smooth; }
+  body { font-family: var(--font-fa); background: var(--bg); color: var(--text); line-height: 1.7; direction: rtl; }
+  body.ltr { font-family: var(--font); direction: ltr; text-align: left; }
+  .container { max-width: 760px; margin: 0 auto; padding: 0 1.5rem 5rem; }
+
+  .nav { padding: 1.25rem 0; margin-bottom: 2.5rem; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
+  .nav-back { font-size: 13px; color: var(--text2); text-decoration: none; display: flex; align-items: center; gap: 6px; transition: color .18s; }
+  .nav-back:hover { color: var(--text); }
+  .ltr .nav-back { flex-direction: row-reverse; }
+  .lang-toggle { display: flex; gap: 8px; }
+  .lang-btn { padding: 5px 14px; border-radius: 20px; border: 1px solid var(--border2); background: transparent; cursor: pointer; font-size: 12px; color: var(--text2); font-family: inherit; transition: all .18s; }
+  .lang-btn.active { background: var(--bg2); color: var(--text); font-weight: 500; }
+
+  .hero { margin-bottom: 2.5rem; }
+  .hero-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 1rem; }
+  .tag { font-size: 12px; padding: 3px 12px; border-radius: 20px; font-weight: 500; }
+  .tag-blue { background: var(--blue-light); color: var(--blue-text); }
+  .tag-navy { background: var(--navy-light); color: var(--navy-text); }
+  .hero-title { font-size: 32px; font-weight: 600; line-height: 1.25; margin-bottom: .75rem; }
+  .hero-subtitle { font-size: 16px; color: var(--text2); max-width: 600px; line-height: 1.75; }
+
+  .meta-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; margin: 2rem 0 3rem; }
+  .meta-item { background: var(--bg2); padding: .9rem 1.25rem; }
+  .meta-label { font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: var(--text3); margin-bottom: .3rem; }
+  .meta-value { font-size: 14px; font-weight: 500; color: var(--text); }
+
+  .nda-notice { background: var(--bg3); border: 1px dashed var(--border2); border-radius: var(--radius-sm); padding: .9rem 1.25rem; margin-bottom: 3rem; font-size: 13px; color: var(--text3); display: flex; align-items: center; gap: 8px; }
+
+  .cover { border-radius: var(--radius); overflow: hidden; margin-bottom: 3rem; background: var(--navy); }
+  .cover img { width: 100%; max-height: 440px; object-fit: cover; object-position: top; display: block; }
+
+  .divider { height: 1px; background: var(--border); margin: 2.5rem 0; }
+  .section { margin-bottom: 3rem; }
+  .section-num { font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--text3); margin-bottom: .5rem; }
+  .section-title { font-size: 22px; font-weight: 600; margin-bottom: 1rem; line-height: 1.3; }
+  .section-body { font-size: 15px; color: var(--text2); line-height: 1.8; }
+  .section-body p { margin-bottom: 1rem; }
+  .section-body p:last-child { margin-bottom: 0; }
+
+  .callout { background: var(--blue-light); border-right: 3px solid var(--blue); border-radius: var(--radius-sm); padding: 1rem 1.25rem; margin: 1.5rem 0; font-size: 15px; color: var(--blue-text); line-height: 1.7; }
+  .ltr .callout { border-right: none; border-left: 3px solid var(--blue); }
+
+  .features { display: flex; flex-direction: column; gap: 12px; margin: 1.5rem 0; }
+  .feature-item { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 1rem 1.25rem; }
+  .feature-title { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: .3rem; }
+  .feature-desc { font-size: 14px; color: var(--text2); line-height: 1.65; }
+
+  /* Design system swatches */
+  .ds-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(90px, 1fr)); gap: 8px; margin: 1.5rem 0; }
+  .ds-swatch { border-radius: var(--radius-sm); overflow: hidden; border: 1px solid var(--border); }
+  .ds-fill { height: 44px; }
+  .ds-label { font-size: 11px; text-align: center; padding: .35rem 0; background: var(--bg2); color: var(--text2); }
+
+  .module-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; margin: 1.5rem 0; }
+  .module-card { background: var(--blue-light); border-radius: var(--radius-sm); padding: .9rem 1rem; text-align: center; }
+  .module-icon { font-size: 22px; margin-bottom: .4rem; }
+  .module-name { font-size: 13px; font-weight: 600; color: var(--blue-text); }
+
+  .screen-wrap { display: flex; justify-content: center; gap: 16px; margin: 2rem 0; flex-wrap: wrap; }
+  .screen-full { width: 100%; border-radius: var(--radius); box-shadow: 0 8px 32px rgba(0,0,0,.10); display: block; border: 1px solid var(--border); }
+  .screen-half { width: 48%; min-width: 240px; border-radius: var(--radius-sm); box-shadow: 0 6px 24px rgba(0,0,0,.10); display: block; border: 1px solid var(--border); }
+  .screen-mobile { width: 220px; border-radius: 18px; box-shadow: 0 8px 28px rgba(0,0,0,.12); display: block; }
+
+  .reflection { background: var(--bg3); border-radius: var(--radius); padding: 1.5rem; margin: 1.5rem 0; border: 1px solid var(--border2); }
+
+  .nav-bottom { margin-top: 4rem; padding-top: 2rem; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+  .nav-bottom a { font-size: 14px; color: var(--text2); text-decoration: none; display: flex; align-items: center; gap: 6px; padding: 8px 16px; border: 1px solid var(--border2); border-radius: var(--radius-sm); transition: all .18s; }
+  .nav-bottom a:hover { background: var(--bg2); color: var(--text); }
+
+  @media (max-width: 480px) {
+    .hero-title { font-size: 24px; }
+    .screen-half { width: 100%; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <nav class="nav">
+    <a class="nav-back" href="../index.html" id="navBack">← بازگشت به پورتفولیو</a>
+    <div class="lang-toggle">
+      <button class="lang-btn active" onclick="setLang('fa')">فارسی</button>
+      <button class="lang-btn" onclick="setLang('en')">English</button>
+    </div>
+  </nav>
+  <div id="content"></div>
+</div>
+
+<script>
+const IMG = 'img/spms/';
+
+const c = {
+  fa: {
+    dir:'rtl', cls:'',
+    navBack:'← بازگشت به پورتفولیو',
+    tags:[
+      { text:'کیس استادی', cls:'tag-blue' },
+      { text:'ریدیزاین سازمانی', cls:'tag-navy' },
+    ],
+    title:'SPMS — سامانه مدیریت استراتژی و عملکرد',
+    subtitle:'ریدیزاین کامل یک سیستم سازمانی پیچیده برای استانداری خراسان رضوی — تبدیل یک ابزار دیتامحور و شلوغ به رابطی ساده و قابل استفاده',
+    meta:[
+      { label:'نوع پروژه', value:'کیس استادی' },
+      { label:'حوزه', value:'UI/UX Redesign' },
+      { label:'ابزار', value:'Figma' },
+      { label:'سال', value:'۱۴۰۳' },
+    ],
+    ndaText:'به دلیل قرارداد محرمانگی با کارفرما (استانداری خراسان رضوی)، لینک مستقیم فایل Figma در دسترس نیست. تصاویر زیر بخشی از خروجی نهایی پروژه است.',
+    sections:[
+      {
+        num:'۰۱', title:'معرفی پروژه',
+        body:`<p>SPMS (Strategic and Performance Management System) یک سامانه داخلی برای استانداری خراسان رضوی است که مدیریت استراتژی سازمانی، ارزشیابی عملکرد کارکنان، و پیگیری پروژه‌ها را در یک پلتفرم واحد گرد هم می‌آورد.</p><p>این پروژه یک <strong>ریدیزاین کامل</strong> بود — نسخه قبلی سامانه به دلیل حجم بالای داده و فرم‌های پیچیده، برای کاربران (مدیران و کارشناسان سازمانی) دشوار و کلافه‌کننده بود.</p>`,
+        imgs:['01-login.png'],
+        imgType:'full',
+      },
+      {
+        num:'۰۲', title:'چالش اصلی پروژه',
+        body:`<p>مدیر پروژه یک خواسته صریح داشت: <strong>تمام دیتای موجود باید نمایش داده شود</strong>، اما در کوچک‌ترین و فشرده‌ترین حالت ممکن. سامانه شامل ماژول‌های متعددی بود که هرکدام حجم زیادی از اطلاعات را حمل می‌کردند.</p>`,
+        moduleTitle: 'ماژول‌های اصلی سامانه',
+        modules:[
+          { icon:'🎯', name:'OKR استراتژیک' },
+          { icon:'📊', name:'BSC سازمانی' },
+          { icon:'📈', name:'KPI و شاخص‌ها' },
+          { icon:'✅', name:'مدیریت کارها' },
+          { icon:'🗂️', name:'کنترل پروژه' },
+          { icon:'📝', name:'ارزشیابی فردی' },
+          { icon:'🎫', name:'تیکت‌ها' },
+          { icon:'📨', name:'نامه‌ها' },
+        ],
+        callout:'چگونه می‌توانیم حجم بالای داده‌های سازمانی (نمودارها، شاخص‌ها، وضعیت‌ها، اولویت‌ها) را در رابطی فشرده نمایش دهیم، بدون آنکه کاربر در میان اطلاعات گم شود؟',
+        imgs:[],
+      },
+      {
+        num:'۰۳', title:'سیستم طراحی — پایه‌ای برای مقیاس‌پذیری',
+        body:`<p>با توجه به تعداد بالای صفحات و فرم‌ها، اولین قدم ساخت یک <strong>Design System</strong> منسجم بود. این کار نه فقط سرعت طراحی را بالا برد، بلکه ثبات بصری را در کل سامانه تضمین کرد.</p>`,
+        features:[
+          { title:'سیستم رنگی هدفمند', desc:'۶ خانواده رنگی (آبی، سبز، قرمز، نارنجی، خاکستری، زرد) با ۱۰ سایه برای هرکدام — هر رنگ معنای مشخصی در سامانه دارد (مثلاً قرمز برای فوریت، سبز برای تایید).' },
+          { title:'کتابخانه دکمه استاندارد', desc:'دکمه‌های Primary، Secondary، Hover، Disable و Icon Button برای تمام عملیات‌های تکراری (ذخیره، حذف، تایید، رد) — یکپارچگی در تمام فرم‌ها.' },
+          { title:'سیستم سایه (Shadow)', desc:'چهار سطح سایه (Extra Small تا Large) برای ایجاد عمق بصری و تفکیک پنجره‌های پاپ‌آپ از محتوای پس‌زمینه.' },
+        ],
+        imgs:['02-design-system.png'],
+        imgType:'full',
+      },
+      {
+        num:'۰۴', title:'صفحه ورود و فضای برند',
+        body:`<p>صفحه ورود اولین نقطه تماس کاربر با سامانه است. با وجود محیط سازمانی رسمی، تلاش شد فضای بصری گرم و قابل‌اعتماد باشد — با معرفی برند (آوای پژواک توسعه آینده) و انتخاب زبان (فارسی/عربی/انگلیسی) برای کاربران چندزبانه.</p>`,
+        imgs:['03-login-screen.png'],
+        imgType:'full',
+      },
+      {
+        num:'۰۵', title:'صفحه اصلی لندینگ — معرفی سامانه',
+        body:`<p>پیش از ورود، کاربران یک صفحه معرفی می‌بینند که هدف سامانه و پل ارتباطی با استانداری خراسان رضوی را توضیح می‌دهد. این صفحه با المان‌های بومی (تصاویر بناهای مشهد) طراحی شد تا حس تعلق سازمانی را تقویت کند.</p>`,
+        imgs:['04-landing.png'],
+        imgType:'full',
+      },
+      {
+        num:'۰۶', title:'داشبورد — فشرده‌سازی دیتای پیچیده',
+        body:`<p>این بخش چالش‌برانگیزترین قسمت پروژه بود. داشبورد اصلی باید نمایش می‌داد: امتیاز کلی عملکرد، نمودار کمیت/کیفیت/سرعت، تب‌بندی کارها بر اساس وضعیت (جاری، راکد، جدید، تضمین کیفیت)، و فهرست کارهای فعال با اولویت‌بندی رنگی — همه در یک صفحه، بدون اسکرول بیش از حد.</p>`,
+        features:[
+          { title:'برچسب‌های اولویت رنگی', desc:'فوری (قرمز)، زیاد (نارنجی)، متوسط (زرد)، کم (سبز) — تشخیص آنی وضعیت کار بدون نیاز به خوانش متن.' },
+          { title:'گیج امتیاز کلی (Score Gauge)', desc:'یک نماگر دایره‌ای که امتیاز کلی عملکرد فرد را در یک نگاه نمایش می‌دهد — جای نمودارهای پیچیده‌تر را گرفت.' },
+          { title:'سایدبار جامع اما فشرده', desc:'دسترسی به تمام ماژول‌ها (نامه، گزارش، تنظیمات، راهنما) از طریق آیکون‌های کوچک با برچسب — کمترین فضای اشغالی، بیشترین دسترسی.' },
+        ],
+        imgs:['05-dashboard.png'],
+        imgType:'full',
+      },
+      {
+        num:'۰۷', title:'فرم‌های پیچیده — مدیریت داده‌های چندبخشی',
+        body:`<p>سامانه شامل ده‌ها فرم با فیلدهای متعدد بود (تعریف شاخص، گزارش پیشرفت، ثبت اقدام). برای جلوگیری از سردرگمی، فرم‌ها به بخش‌های منطقی تفکیک شدند و از Auto-complete برای فیلدهای تکراری (مانند نام واحد سازمانی) استفاده شد.</p>`,
+        imgs:['06-forms.png'],
+        imgType:'full',
+      },
+      {
+        num:'۰۸', title:'ریسپانسیو موبایل',
+        body:`<p>با وجود ماهیت سازمانی و دیتامحور این سامانه، طراحی موبایل برای مدیرانی که نیاز به دسترسی سریع از بیرون سازمان دارند ضروری بود. چالش اصلی، بازچینی همان داشبورد فشرده روی صفحه کوچک‌تر بود.</p>`,
+        imgs:['07-mobile.png'],
+        imgType:'mobile',
+      },
+      {
+        num:'۰۹', title:'بازتاب و درس‌آموخته',
+        reflection:true,
+        body:`<p>این پروژه یکی از پیچیده‌ترین تجربه‌های طراحی من بود — تعادل بین «نمایش همه چیز» (خواسته مدیر پروژه) و «اصول UX برای کاهش بار شناختی» همیشه ساده نیست.</p>`,
+        lessons:[
+          { title:'سیستم طراحی، سرمایه‌گذاری بلندمدت است', desc:'ساختن Design System از ابتدا، در فازهای بعدی پروژه (که فرم‌های جدید اضافه می‌شد) سرعت کار را چند برابر کرد.' },
+          { title:'فشرده‌سازی با اولویت‌بندی بصری', desc:'یاد گرفتم وقتی نمی‌توان حجم داده را کم کرد، باید با رنگ، اندازه و موقعیت، مسیر چشم کاربر را هدایت کرد.' },
+          { title:'کار با محدودیت‌های واقعی سازمانی', desc:'گاهی بهترین راه‌حل UX ممکن نیست، اما طراح خوب در همان چارچوب، بهینه‌ترین خروجی را ارائه می‌دهد.' },
+        ],
+        imgs:[],
+      },
+    ],
+    navBack2:'← بازگشت به پورتفولیو',
+    navNext:'پروژه بعدی ←',
+  },
+  en: {
+    dir:'ltr', cls:'ltr',
+    navBack:'← Back to portfolio',
+    tags:[
+      { text:'Case Study', cls:'tag-blue' },
+      { text:'Enterprise Redesign', cls:'tag-navy' },
+    ],
+    title:'SPMS — Strategic & Performance Management System',
+    subtitle:'A full redesign of a complex enterprise system for the Khorasan Razavi Governorate — turning a dense, data-heavy tool into a usable, structured interface.',
+    meta:[
+      { label:'Type', value:'Case Study' },
+      { label:'Domain', value:'UI/UX Redesign' },
+      { label:'Tool', value:'Figma' },
+      { label:'Year', value:'2024' },
+    ],
+    ndaText:'Due to a confidentiality agreement with the client (Khorasan Razavi Governorate), a direct Figma file link is not available. The images below are part of the final delivered output.',
+    sections:[
+      {
+        num:'01', title:'Project overview',
+        body:`<p>SPMS (Strategic and Performance Management System) is an internal platform for the Khorasan Razavi Governorate that unifies organizational strategy management, employee performance evaluation, and project tracking into a single system.</p><p>This was a <strong>full redesign</strong> — the previous version was overwhelming and difficult to use due to high data density and complex forms.</p>`,
+        imgs:['01-login.png'],
+        imgType:'full',
+      },
+      {
+        num:'02', title:'The core challenge',
+        body:`<p>The project manager had an explicit requirement: <strong>all existing data had to remain visible</strong>, but in the smallest, most compact form possible. The system included multiple modules, each carrying large amounts of information.</p>`,
+        moduleTitle:'Core system modules',
+        modules:[
+          { icon:'🎯', name:'Strategic OKR' },
+          { icon:'📊', name:'Organizational BSC' },
+          { icon:'📈', name:'KPI & Metrics' },
+          { icon:'✅', name:'Task Management' },
+          { icon:'🗂️', name:'Project Control' },
+          { icon:'📝', name:'Individual Evaluation' },
+          { icon:'🎫', name:'Tickets' },
+          { icon:'📨', name:'Correspondence' },
+        ],
+        callout:'How might we display a high volume of organizational data (charts, indicators, statuses, priorities) in a compact interface — without users getting lost in the noise?',
+        imgs:[],
+      },
+      {
+        num:'03', title:'Design system — a foundation for scale',
+        body:`<p>Given the large number of screens and forms, the first step was building a cohesive <strong>Design System</strong>. This sped up the design process and ensured visual consistency across the whole platform.</p>`,
+        features:[
+          { title:'Purposeful color system', desc:'6 color families (blue, green, red, orange, grey, yellow) with 10 shades each — every color carries specific meaning (e.g. red for urgency, green for approval).' },
+          { title:'Standardized button library', desc:'Primary, Secondary, Hover, Disabled, and Icon button states for all recurring actions (save, delete, approve, reject) — consistency across every form.' },
+          { title:'Shadow system', desc:'Four elevation levels (Extra Small to Large) to create visual depth and separate pop-up windows from background content.' },
+        ],
+        imgs:['02-design-system.png'],
+        imgType:'full',
+      },
+      {
+        num:'04', title:'Login screen & brand presence',
+        body:`<p>The login screen is the user's first touchpoint with the system. Despite the formal enterprise context, I aimed for a warm, trustworthy visual tone — introducing the brand and offering language selection (Persian/Arabic/English) for multilingual users.</p>`,
+        imgs:['03-login-screen.png'],
+        imgType:'full',
+      },
+      {
+        num:'05', title:'Landing page — system introduction',
+        body:`<p>Before logging in, users see an introduction page explaining the system's purpose and its role as a communication bridge with the Khorasan Razavi Governorate. The page uses local landmarks (Mashhad architecture) to strengthen organizational identity.</p>`,
+        imgs:['04-landing.png'],
+        imgType:'full',
+      },
+      {
+        num:'06', title:'Dashboard — compressing complex data',
+        body:`<p>This was the most challenging part of the project. The main dashboard had to display: an overall performance score, quantity/quality/speed charts, status-based task tabs (active, stalled, new, quality assurance), and a prioritized task list — all on one screen, without excessive scrolling.</p>`,
+        features:[
+          { title:'Color-coded priority tags', desc:'Urgent (red), High (orange), Medium (yellow), Low (green) — instant status recognition without reading text.' },
+          { title:'Overall score gauge', desc:'A circular indicator showing overall performance score at a glance — replacing the need for more complex charts.' },
+          { title:'Dense but complete sidebar', desc:'Access to every module (mail, reports, settings, help) through compact labeled icons — minimal footprint, maximum reach.' },
+        ],
+        imgs:['05-dashboard.png'],
+        imgType:'full',
+      },
+      {
+        num:'07', title:'Complex forms — managing multi-part data',
+        body:`<p>The system included dozens of multi-field forms (defining KPIs, progress reports, logging actions). To avoid confusion, forms were broken into logical sections, and auto-complete was used for repetitive fields (such as department names).</p>`,
+        imgs:['06-forms.png'],
+        imgType:'full',
+      },
+      {
+        num:'08', title:'Mobile responsiveness',
+        body:`<p>Despite the data-heavy enterprise nature of the system, mobile design was essential for managers needing quick access outside the office. The main challenge was re-flowing the same dense dashboard onto a smaller screen.</p>`,
+        imgs:['07-mobile.png'],
+        imgType:'mobile',
+      },
+      {
+        num:'09', title:'Reflection & lessons learned',
+        reflection:true,
+        body:`<p>This was one of my most complex design experiences — balancing "show everything" (the PM's requirement) against UX principles for reducing cognitive load is never simple.</p>`,
+        lessons:[
+          { title:'A design system is a long-term investment', desc:'Building the design system early dramatically sped up later project phases when new forms were added.' },
+          { title:'Compression through visual hierarchy', desc:'When data volume can\'t be reduced, color, size, and placement become the tools that guide the user\'s eye.' },
+          { title:'Designing within real organizational limits', desc:'Sometimes the ideal UX solution isn\'t possible — a good designer delivers the best output within the actual constraints.' },
+        ],
+        imgs:[],
+      },
+    ],
+    navBack2:'← Back to portfolio',
+    navNext:'Next project →',
+  }
+};
+
+function renderSection(s) {
+  let html = `<div class="section">
+    <div class="section-num">${s.num}</div>
+    <div class="section-title">${s.title}</div>`;
+
+  if (!s.reflection) html += `<div class="section-body">${s.body}</div>`;
+
+  if (s.moduleTitle) {
+    html += `<div class="feature-title" style="margin-top:1.25rem">${s.moduleTitle}</div>
+      <div class="module-grid">` + s.modules.map(m =>
+        `<div class="module-card"><div class="module-icon">${m.icon}</div><div class="module-name">${m.name}</div></div>`
+      ).join('') + `</div>`;
+  }
+
+  if (s.callout) html += `<div class="callout">${s.callout}</div>`;
+
+  if (s.features) {
+    html += `<div class="features">` + s.features.map(f =>
+      `<div class="feature-item">
+        <div class="feature-title">${f.title}</div>
+        <div class="feature-desc">${f.desc}</div>
+      </div>`).join('') + `</div>`;
+  }
+
+  if (s.reflection) {
+    html += `<div class="reflection"><div class="section-body">${s.body}</div></div>`;
+  }
+
+  if (s.lessons) {
+    html += `<div class="features">` + s.lessons.map(f =>
+      `<div class="feature-item">
+        <div class="feature-title">← ${f.title}</div>
+        <div class="feature-desc">${f.desc}</div>
+      </div>`).join('') + `</div>`;
+  }
+
+  if (s.imgs && s.imgs.length) {
+    if (s.imgType === 'mobile') {
+      html += `<div class="screen-wrap">` +
+        s.imgs.map(img => `<img class="screen-mobile" src="${IMG}${img}" alt="${s.title}" loading="lazy">`).join('') +
+        `</div>`;
+    } else {
+      html += s.imgs.map(img => `<img class="screen-full" src="${IMG}${img}" alt="${s.title}" loading="lazy" style="margin-top:1.5rem">`).join('');
+    }
+  }
+
+  html += `</div><div class="divider"></div>`;
+  return html;
+}
+
+function setLang(lang) {
+  const d = c[lang];
+  document.documentElement.lang = lang;
+  document.documentElement.dir = d.dir;
+  document.body.className = d.cls;
+  document.querySelector('#navBack').textContent = d.navBack;
+  document.querySelectorAll('.lang-btn').forEach(b => {
+    b.classList.toggle('active', b.textContent.trim() === (lang==='fa'?'فارسی':'English'));
+  });
+
+  const tagHtml = d.tags.map(t=>`<span class="tag ${t.cls}">${t.text}</span>`).join('');
+  const metaHtml = d.meta.map(m=>`<div class="meta-item"><div class="meta-label">${m.label}</div><div class="meta-value">${m.value}</div></div>`).join('');
+  const sectionsHtml = d.sections.map(renderSection).join('');
+
+  document.getElementById('content').innerHTML = `
+    <div class="hero">
+      <div class="hero-tags">${tagHtml}</div>
+      <div class="hero-title">${d.title}</div>
+      <div class="hero-subtitle">${d.subtitle}</div>
+    </div>
+    <div class="meta-row">${metaHtml}</div>
+    <div class="nda-notice">🔒 ${d.ndaText}</div>
+    <div class="cover"><img src="${IMG}01-login.png" alt="SPMS login"></div>
+    <div class="divider"></div>
+    ${sectionsHtml}
+    <div class="nav-bottom">
+      <a href="../index.html">${d.navBack2}</a>
+      <a href="#">${d.navNext}</a>
+    </div>`;
+}
+
+setLang('fa');
+</script>
+</body>
+</html>

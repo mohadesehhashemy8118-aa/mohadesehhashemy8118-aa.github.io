@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>هتل لتوس پارسیان — کیس استادی | Mohadeseh Hashemi</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #ffffff; --bg2: #f8f6f2; --bg3: #f2ede4;
+    --text: #1a1a1e; --text2: #5a5a6a; --text3: #9898a8;
+    --border: #e8e4dc; --border2: #d4cfc4;
+    --gold: #9a7b3a; --gold-light: #f7f0e2; --gold-text: #6b5320;
+    --navy: #051748; --navy-light: #e8eaf2; --navy-text: #051748;
+    --radius: 12px; --radius-sm: 8px;
+    --font: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    --font-fa: 'Vazirmatn', 'Segoe UI', Tahoma, sans-serif;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #141410; --bg2: #1e1c18; --bg3: #242018;
+      --text: #f0ede5; --text2: #a8a090; --text3: #68605a;
+      --border: #2e2a22; --border2: #3e3a30;
+      --gold-light: #2a2010; --gold-text: #d4a855;
+      --navy-light: #101830; --navy-text: #8899cc;
+    }
+  }
+
+  html { font-size: 16px; scroll-behavior: smooth; }
+  body { font-family: var(--font-fa); background: var(--bg); color: var(--text); line-height: 1.7; direction: rtl; }
+  body.ltr { font-family: var(--font); direction: ltr; text-align: left; }
+  .container { max-width: 760px; margin: 0 auto; padding: 0 1.5rem 5rem; }
+
+  .nav { padding: 1.25rem 0; margin-bottom: 2.5rem; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
+  .nav-back { font-size: 13px; color: var(--text2); text-decoration: none; display: flex; align-items: center; gap: 6px; transition: color .18s; }
+  .nav-back:hover { color: var(--text); }
+  .ltr .nav-back { flex-direction: row-reverse; }
+  .lang-toggle { display: flex; gap: 8px; }
+  .lang-btn { padding: 5px 14px; border-radius: 20px; border: 1px solid var(--border2); background: transparent; cursor: pointer; font-size: 12px; color: var(--text2); font-family: inherit; transition: all .18s; }
+  .lang-btn.active { background: var(--bg2); color: var(--text); font-weight: 500; }
+
+  .hero { margin-bottom: 2.5rem; }
+  .hero-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 1rem; }
+  .tag { font-size: 12px; padding: 3px 12px; border-radius: 20px; font-weight: 500; }
+  .tag-gold  { background: var(--gold-light);  color: var(--gold-text); }
+  .tag-navy  { background: var(--navy-light);  color: var(--navy-text); }
+  .hero-title { font-size: 32px; font-weight: 600; line-height: 1.25; margin-bottom: .75rem; }
+  .hero-subtitle { font-size: 16px; color: var(--text2); max-width: 600px; line-height: 1.75; }
+
+  .meta-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; margin: 2rem 0 3rem; }
+  .meta-item { background: var(--bg2); padding: .9rem 1.25rem; }
+  .meta-label { font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: var(--text3); margin-bottom: .3rem; }
+  .meta-value { font-size: 14px; font-weight: 500; color: var(--text); }
+
+  .cover { border-radius: var(--radius); overflow: hidden; margin-bottom: 3rem; background: var(--navy); }
+  .cover img { width: 100%; max-height: 440px; object-fit: cover; object-position: top; display: block; }
+
+  .divider { height: 1px; background: var(--border); margin: 2.5rem 0; }
+  .section { margin-bottom: 3rem; }
+  .section-num { font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--text3); margin-bottom: .5rem; }
+  .section-title { font-size: 22px; font-weight: 600; margin-bottom: 1rem; line-height: 1.3; }
+  .section-body { font-size: 15px; color: var(--text2); line-height: 1.8; }
+  .section-body p { margin-bottom: 1rem; }
+  .section-body p:last-child { margin-bottom: 0; }
+
+  .callout { background: var(--gold-light); border-right: 3px solid var(--gold); border-radius: var(--radius-sm); padding: 1rem 1.25rem; margin: 1.5rem 0; font-size: 15px; color: var(--gold-text); line-height: 1.7; }
+  .ltr .callout { border-right: none; border-left: 3px solid var(--gold); }
+
+  .constraint-box { background: var(--navy-light); border: 1px solid #c0c8e0; border-radius: var(--radius-sm); padding: 1rem 1.25rem; margin: 1.5rem 0; font-size: 14px; color: var(--navy-text); line-height: 1.7; }
+
+  /* Color palette display */
+  .color-palette { display: flex; gap: 10px; margin: 1.5rem 0; flex-wrap: wrap; }
+  .color-swatch { border-radius: var(--radius-sm); overflow: hidden; flex: 1; min-width: 100px; }
+  .color-fill { height: 60px; }
+  .color-info { padding: .5rem .75rem; background: var(--bg2); border: 1px solid var(--border); border-top: none; }
+  .color-name { font-size: 12px; font-weight: 600; color: var(--text); }
+  .color-hex { font-size: 11px; color: var(--text3); font-family: monospace; }
+
+  .features { display: flex; flex-direction: column; gap: 12px; margin: 1.5rem 0; }
+  .feature-item { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 1rem 1.25rem; }
+  .feature-title { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: .3rem; }
+  .feature-desc { font-size: 14px; color: var(--text2); line-height: 1.65; }
+
+  /* Screen images */
+  .screen-wrap { display: flex; justify-content: center; gap: 16px; margin: 2rem 0; flex-wrap: wrap; }
+  .screen-full { width: 100%; border-radius: var(--radius); box-shadow: 0 8px 32px rgba(0,0,0,.10); display: block; border: 1px solid var(--border); }
+  .screen-img { width: 220px; border-radius: 14px; box-shadow: 0 8px 28px rgba(0,0,0,.12); display: block; border: 1px solid var(--border); }
+  .screen-desktop { max-width: 100%; border-radius: var(--radius); box-shadow: 0 8px 32px rgba(0,0,0,.10); display: block; border: 1px solid var(--border); margin: 2rem auto; }
+
+  /* Honest reflection */
+  .reflection { background: var(--bg3); border-radius: var(--radius); padding: 1.5rem; margin: 2rem 0; border: 1px solid var(--border2); }
+  .reflection-title { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: .6rem; }
+  .reflection-body { font-size: 14px; color: var(--text2); line-height: 1.7; }
+
+  .nav-bottom { margin-top: 4rem; padding-top: 2rem; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+  .nav-bottom a { font-size: 14px; color: var(--text2); text-decoration: none; display: flex; align-items: center; gap: 6px; padding: 8px 16px; border: 1px solid var(--border2); border-radius: var(--radius-sm); transition: all .18s; }
+  .nav-bottom a:hover { background: var(--bg2); color: var(--text); }
+
+  @media (max-width: 480px) {
+    .hero-title { font-size: 24px; }
+    .screen-img { width: 100%; max-width: 280px; }
+    .color-swatch { min-width: 80px; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <nav class="nav">
+    <a class="nav-back" href="../index.html" id="navBack">← بازگشت به پورتفولیو</a>
+    <div class="lang-toggle">
+      <button class="lang-btn active" onclick="setLang('fa')">فارسی</button>
+      <button class="lang-btn" onclick="setLang('en')">English</button>
+    </div>
+  </nav>
+  <div id="content"></div>
+</div>
+
+<script>
+const IMG = 'img/lotus-hotel/';
+
+const c = {
+  fa: {
+    dir:'rtl', cls:'',
+    navBack: '← بازگشت به پورتفولیو',
+    tags:[
+      { text:'پروژه کلاینت', cls:'tag-gold' },
+      { text:'طراحی وبسایت', cls:'tag-navy' },
+    ],
+    title: 'هتل لتوس پارسیان',
+    subtitle: 'طراحی رابط کاربری وبسایت برای هتل آپارتمانی لتوس پارسیان مشهد — ترکیب هویت بصری لاکچری با نزدیکی به حرم',
+    meta:[
+      { label:'نوع پروژه', value:'پروژه کلاینت' },
+      { label:'حوزه', value:'UI Design' },
+      { label:'ابزار', value:'Figma' },
+      { label:'سال', value:'۱۴۰۲' },
+    ],
+    sections:[
+      {
+        num:'۰۱', title:'معرفی پروژه',
+        body:`<p>هتل آپارتمان لتوس پارسیان مجموعه‌ای چند طبقه در مشهد، در فاصله چند قدمی حرم مطهر امام رضا (ع) است. کارفرما به دنبال یک وبسایت حرفه‌ای بود که هم قابلیت رزرو آنلاین اتاق داشته باشد و هم امکانات هتل را به زائران و مسافران معرفی کند.</p><p>این پروژه یک پروژه UI محور بود — یعنی طراحی رابط کاربری بر اساس نیازهای مستقیم کارفرما، بدون مرحله تحقیق کاربری گسترده.</p>`,
+        imgs:['01-cover.png'],
+        imgType:'full',
+      },
+      {
+        num:'۰۲', title:'چالش — طراحی در چارچوب کارفرما',
+        body:`<p>یکی از واقعیت‌های کار حرفه‌ای اینه که گاهی کارفرما انتظارات مشخصی داره و طراح باید بهترین خروجی ممکن رو در اون چارچوب ارائه بده. این پروژه دقیقاً همین حالت بود.</p>`,
+        constraints:[
+          { title:'محتوای زیاد در یک صفحه', desc:'کارفرما می‌خواست تمام امکانات هتل (رستوران، استخر، لابی، اتاق‌ها، کافی‌شاپ، باشگاه ورزشی) در صفحه اصلی نمایش داده شود.' },
+          { title:'اولویت اطلاعات به جای تجربه', desc:'تمرکز اصلی کارفرما بر نمایش اطلاعات بود، نه روی سادگی تجربه رزرو.' },
+          { title:'الزام به ریسپانسیو بودن', desc:'وبسایت باید هم روی دسکتاپ و هم موبایل به درستی کار می‌کرد — چون اکثر زائران با گوشی رزرو می‌کنند.' },
+        ],
+        callout: 'چالش اصلی این بود که حجم زیادی از اطلاعات را بدون ایجاد سردرگمی برای کاربر سازماندهی کنم — و در عین حال هویت بصری یک هتل لاکچری را حفظ کنم.',
+        imgs:['02-hero.png'],
+        imgType:'desktop',
+      },
+      {
+        num:'۰۳', title:'تصمیمات طراحی — هویت بصری',
+        body:`<p>با توجه به موقعیت هتل (نزدیکی به حرم) و سطح قیمتی لاکچری، انتخاب پالت رنگی ترکیبی از سرمه‌ای عمیق و طلایی بود که هم با آرامش فضای معنوی همخوانی داشته باشد و هم اعتبار یک هتل درجه‌یک را منتقل کند.</p>`,
+        colors:[
+          { name:'Navy Deep', hex:'#051748', fill:'#051748', light:true },
+          { name:'Charcoal', hex:'#4B4B4B', fill:'#4B4B4B', light:true },
+          { name:'Warm White', hex:'#E1E1E1', fill:'#E1E1E1', light:false },
+          { name:'Gold', hex:'#9A7B3A', fill:'#9A7B3A', light:true },
+        ],
+        colorNote: 'ترکیب سرمه‌ای + طلایی برای هتل‌های مذهبی-لاکچری انتخاب درستیه — به آرامش و اعتبار همزمان اشاره می‌کنه.',
+        features:[
+          { title:'ناوبری ساده و ثابت', desc:'نوار ناوبری با حداقل آیتم‌ها (ارتباط با ما، وبلاگ، رزرو آنلاین) تا کاربر گم نشه و مسیر رزرو همیشه در دسترس باشه.' },
+          { title:'هیرو با موقعیت مکانی برجسته', desc:'نمایش تصویر هتل با پس‌زمینه گنبد حرم — تاکید بر موقعیت جغرافیایی به عنوان مهم‌ترین مزیت رقابتی هتل.' },
+          { title:'دسته‌بندی امکانات با گرید', desc:'نمایش ۶ امکانات اصلی در گرید ۳×۲ با تصویر و برچسب — کمترین بار شناختی برای اسکن سریع.' },
+        ],
+        imgs:['03-fullpage.png'],
+        imgType:'full',
+      },
+      {
+        num:'۰۴', title:'طراحی ریسپانسیو',
+        body:`<p>با توجه به اینکه بخش بزرگی از مخاطبان هتل (زائران) از گوشی موبایل استفاده می‌کنند، طراحی موبایل به اندازه دسکتاپ اهمیت داشت.</p>`,
+        features:[
+          { title:'منوی همبرگری در موبایل', desc:'کشویی که فضای محتوا را حداکثر می‌کند و دسترسی به تمام بخش‌ها را حفظ می‌کند.' },
+          { title:'فرم رزرو بهینه‌شده', desc:'فرم رزرو اتاق با فیلدهای کشویی و افزایش/کاهش تعداد نفر — طراحی شده برای لمس آسان روی گوشی.' },
+          { title:'صفحات داخلی منسجم', desc:'صفحات رستوران، کافی‌شاپ و اتاق‌ها با همان زبان بصری هیرو طراحی شدند تا تجربه یکپارچه‌ای ایجاد شود.' },
+        ],
+        imgs:['05-mobile.png'],
+        imgType:'full',
+      },
+      {
+        num:'۰۵', title:'بازتاب و درس‌آموخته',
+        reflection: true,
+        body:`<p>این پروژه تجربه ارزشمندی از کار با کارفرما بود. یاد گرفتم که طراح حرفه‌ای باید بتواند در چارچوب محدودیت‌های واقعی بهترین خروجی را ارائه دهد — نه اینکه همیشه شرایط ایده‌آل داشته باشد.</p>`,
+        lessons:[
+          { title:'مذاکره بر سر اولویت‌ها', desc:'اگر این پروژه را دوباره انجام می‌دادم، زودتر درباره سلسله‌مراتب اطلاعات با کارفرما مذاکره می‌کردم — قبل از شروع طراحی.' },
+          { title:'نمونه‌اولیه پیش از طراحی کامل', desc:'ارائه wireframe به کارفرما پیش از طراحی UI می‌توانست از تغییرات دیرهنگام جلوگیری کند.' },
+          { title:'مستندسازی تصمیمات', desc:'مستندسازی دلیل هر تصمیم طراحی کمک می‌کند که توضیح به کارفرما آسان‌تر باشد.' },
+        ],
+        imgs:['06-interior.png'],
+        imgType:'full',
+      },
+    ],
+    navBack2: '← بازگشت به پورتفولیو',
+    navNext: 'پروژه بعدی ←',
+  },
+  en: {
+    dir:'ltr', cls:'ltr',
+    navBack: '← Back to portfolio',
+    tags:[
+      { text:'Client project', cls:'tag-gold' },
+      { text:'Web design', cls:'tag-navy' },
+    ],
+    title: 'Lotus Parsian Hotel',
+    subtitle: 'Website UI design for Lotus Parsian Hotel Apartment in Mashhad — combining a luxury visual identity with proximity to the Holy Shrine.',
+    meta:[
+      { label:'Type', value:'Client project' },
+      { label:'Domain', value:'UI Design' },
+      { label:'Tool', value:'Figma' },
+      { label:'Year', value:'2023' },
+    ],
+    sections:[
+      {
+        num:'01', title:'Project overview',
+        body:`<p>Lotus Parsian Hotel Apartment is a multi-floor complex in Mashhad, located just steps from the Holy Shrine of Imam Reza. The client needed a professional website with online room booking and a full showcase of hotel amenities for pilgrims and travelers.</p><p>This was a UI-focused project — designing the interface based on direct client requirements, without an extensive user research phase.</p>`,
+        imgs:['01-cover.png'],
+        imgType:'full',
+      },
+      {
+        num:'02', title:'Challenge — designing within client constraints',
+        body:`<p>A reality of professional design work is that clients often come with fixed expectations, and the designer has to deliver the best possible output within that framework. This project was exactly that situation.</p>`,
+        constraints:[
+          { title:'High content density', desc:'The client wanted all hotel amenities (restaurant, pool, lobby, rooms, cafe, gym) displayed on the homepage.' },
+          { title:'Information over experience', desc:'The primary focus was on showing information rather than streamlining the booking experience.' },
+          { title:'Full responsiveness required', desc:'The site had to work on both desktop and mobile — since most pilgrims book via phone.' },
+        ],
+        callout: 'The core challenge was organizing a large amount of information without creating confusion — while maintaining the visual identity of a luxury hotel.',
+        imgs:['02-hero.png'],
+        imgType:'desktop',
+      },
+      {
+        num:'03', title:'Design decisions — visual identity',
+        body:`<p>Given the hotel location (near the Holy Shrine) and its luxury positioning, I chose a color palette combining deep navy and gold — evoking both the spiritual calm of the setting and the prestige of a high-end hotel.</p>`,
+        colors:[
+          { name:'Navy Deep', hex:'#051748', fill:'#051748', light:true },
+          { name:'Charcoal', hex:'#4B4B4B', fill:'#4B4B4B', light:true },
+          { name:'Warm White', hex:'#E1E1E1', fill:'#E1E1E1', light:false },
+          { name:'Gold', hex:'#9A7B3A', fill:'#9A7B3A', light:true },
+        ],
+        colorNote: 'Navy + gold is a strong choice for a religious-luxury hotel — it simultaneously signals calm and prestige.',
+        features:[
+          { title:'Minimal, sticky navigation', desc:'Navbar kept to three items (Contact, Blog, Book Online) so the booking path is always visible and users never get lost.' },
+          { title:'Hero with location as the key message', desc:'Hotel image with the shrine dome in background — the geographic position is the strongest competitive advantage, so it leads.' },
+          { title:'Amenities grid', desc:'Six key amenities in a 3x2 grid with photos and labels — minimal cognitive load for quick scanning.' },
+        ],
+        imgs:['03-fullpage.png'],
+        imgType:'full',
+      },
+      {
+        num:'04', title:'Responsive design',
+        body:`<p>A large part of the hotel audience (pilgrims) uses mobile devices, so the mobile design was as important as desktop.</p>`,
+        features:[
+          { title:'Hamburger menu on mobile', desc:'A slide-in drawer that maximizes content space while preserving access to all sections.' },
+          { title:'Optimized booking form', desc:'Room booking form with dropdowns and stepper inputs for guest count — designed for easy touch interaction.' },
+          { title:'Consistent interior pages', desc:'Restaurant, cafe, and room detail pages all use the same visual language as the hero — creating a unified experience.' },
+        ],
+        imgs:['05-mobile.png'],
+        imgType:'full',
+      },
+      {
+        num:'05', title:'Reflection & lessons learned',
+        reflection: true,
+        body:`<p>This project was a valuable experience in working with a client. I learned that a professional designer must be able to deliver strong output within real-world constraints — ideal conditions are rare.</p>`,
+        lessons:[
+          { title:'Negotiate priorities earlier', desc:'If I did this again, I would discuss information hierarchy with the client before any design work started.' },
+          { title:'Wireframes before visuals', desc:'Presenting wireframes first could have prevented late-stage layout changes that slowed the project.' },
+          { title:'Document design decisions', desc:'Keeping a record of why each decision was made makes client explanations much easier.' },
+        ],
+        imgs:['06-interior.png'],
+        imgType:'full',
+      },
+    ],
+    navBack2: '← Back to portfolio',
+    navNext: 'Next project →',
+  }
+};
+
+function renderSection(s, lang) {
+  let html = `<div class="section">
+    <div class="section-num">${s.num}</div>
+    <div class="section-title">${s.title}</div>`;
+
+  if (!s.reflection) {
+    html += `<div class="section-body">${s.body}</div>`;
+  }
+
+  if (s.constraints) {
+    html += `<div class="features">` + s.constraints.map(f =>
+      `<div class="feature-item">
+        <div class="feature-title">${f.title}</div>
+        <div class="feature-desc">${f.desc}</div>
+      </div>`).join('') + `</div>`;
+  }
+
+  if (s.callout) html += `<div class="callout">${s.callout}</div>`;
+
+  if (s.colors) {
+    html += `<div class="color-palette">` + s.colors.map(col =>
+      `<div class="color-swatch">
+        <div class="color-fill" style="background:${col.fill}"></div>
+        <div class="color-info">
+          <div class="color-name">${col.name}</div>
+          <div class="color-hex">${col.hex}</div>
+        </div>
+      </div>`).join('') + `</div>`;
+    if (s.colorNote) html += `<div class="callout">${s.colorNote}</div>`;
+  }
+
+  if (s.features) {
+    html += `<div class="features">` + s.features.map(f =>
+      `<div class="feature-item">
+        <div class="feature-title">${f.title}</div>
+        <div class="feature-desc">${f.desc}</div>
+      </div>`).join('') + `</div>`;
+  }
+
+  if (s.reflection) {
+    html += `<div class="reflection">
+      <div class="section-body">${s.body}</div>
+    </div>`;
+  }
+
+  if (s.lessons) {
+    html += `<div class="features">` + s.lessons.map(f =>
+      `<div class="feature-item">
+        <div class="feature-title">← ${f.title}</div>
+        <div class="feature-desc">${f.desc}</div>
+      </div>`).join('') + `</div>`;
+  }
+
+  if (s.imgs && s.imgs.length) {
+    if (s.imgType === 'desktop' || s.imgType === 'full') {
+      html += `<img class="screen-full" src="${IMG}${s.imgs[0]}" alt="${s.title}" loading="lazy">`;
+    } else {
+      html += `<div class="screen-wrap">` +
+        s.imgs.map(img => `<img class="screen-img" src="${IMG}${img}" alt="${s.title}" loading="lazy">`).join('') +
+        `</div>`;
+    }
+  }
+
+  html += `</div><div class="divider"></div>`;
+  return html;
+}
+
+function setLang(lang) {
+  const d = c[lang];
+  document.documentElement.lang = lang;
+  document.documentElement.dir = d.dir;
+  document.body.className = d.cls;
+  document.querySelector('#navBack').textContent = d.navBack;
+  document.querySelectorAll('.lang-btn').forEach(b => {
+    b.classList.toggle('active', b.textContent.trim() === (lang==='fa'?'فارسی':'English'));
+  });
+
+  const tagHtml = d.tags.map(t=>`<span class="tag ${t.cls}">${t.text}</span>`).join('');
+  const metaHtml = d.meta.map(m=>`<div class="meta-item"><div class="meta-label">${m.label}</div><div class="meta-value">${m.value}</div></div>`).join('');
+  const sectionsHtml = d.sections.map(s => renderSection(s, lang)).join('');
+
+  document.getElementById('content').innerHTML = `
+    <div class="hero">
+      <div class="hero-tags">${tagHtml}</div>
+      <div class="hero-title">${d.title}</div>
+      <div class="hero-subtitle">${d.subtitle}</div>
+    </div>
+    <div class="meta-row">${metaHtml}</div>
+    <div class="cover"><img src="${IMG}01-cover.png" alt="Lotus Parsian Hotel"></div>
+    <div class="divider"></div>
+    ${sectionsHtml}
+    <div class="nav-bottom">
+      <a href="../index.html">${d.navBack2}</a>
+      <a href="#">${d.navNext}</a>
+    </div>`;
+}
+
+setLang('fa');
+</script>
+</body>
+</html>
