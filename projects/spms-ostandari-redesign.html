@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fa" dir="rtl">
+<html lang="en" dir="ltr">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -29,14 +29,14 @@
   }
 
   html { font-size: 16px; scroll-behavior: smooth; }
-  body { font-family: var(--font-fa); background: var(--bg); color: var(--text); line-height: 1.7; direction: rtl; }
-  body.ltr { font-family: var(--font); direction: ltr; text-align: left; }
+  body { font-family: var(--font); background: var(--bg); color: var(--text); line-height: 1.7; direction: ltr; }
+  body.rtl { font-family: var(--font-fa); direction: rtl; text-align: right; }
   .container { max-width: 760px; margin: 0 auto; padding: 0 1.5rem 5rem; }
 
   .nav { padding: 1.25rem 0; margin-bottom: 2.5rem; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
   .nav-back { font-size: 13px; color: var(--text2); text-decoration: none; display: flex; align-items: center; gap: 6px; transition: color .18s; }
   .nav-back:hover { color: var(--text); }
-  .ltr .nav-back { flex-direction: row-reverse; }
+  .rtl .nav-back { flex-direction: row-reverse; }
   .lang-toggle { display: flex; gap: 8px; }
   .lang-btn { padding: 5px 14px; border-radius: 20px; border: 1px solid var(--border2); background: transparent; cursor: pointer; font-size: 12px; color: var(--text2); font-family: inherit; transition: all .18s; }
   .lang-btn.active { background: var(--bg2); color: var(--text); font-weight: 500; }
@@ -67,8 +67,8 @@
   .section-body p { margin-bottom: 1rem; }
   .section-body p:last-child { margin-bottom: 0; }
 
-  .callout { background: var(--blue-light); border-right: 3px solid var(--blue); border-radius: var(--radius-sm); padding: 1rem 1.25rem; margin: 1.5rem 0; font-size: 15px; color: var(--blue-text); line-height: 1.7; }
-  .ltr .callout { border-right: none; border-left: 3px solid var(--blue); }
+  .callout { background: var(--blue-light); border-left: 3px solid var(--blue); border-radius: var(--radius-sm); padding: 1rem 1.25rem; margin: 1.5rem 0; font-size: 15px; color: var(--blue-text); line-height: 1.7; }
+  .rtl .callout { border-left: none; border-right: 3px solid var(--blue); }
 
   .features { display: flex; flex-direction: column; gap: 12px; margin: 1.5rem 0; }
   .feature-item { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 1rem 1.25rem; }
@@ -106,10 +106,10 @@
 <body>
 <div class="container">
   <nav class="nav">
-    <a class="nav-back" href="../index.html" id="navBack">← بازگشت به پورتفولیو</a>
+    <a class="nav-back" href="../index.html" id="navBack">← Back to portfolio</a>
     <div class="lang-toggle">
-      <button class="lang-btn active" onclick="setLang('fa')">فارسی</button>
-      <button class="lang-btn" onclick="setLang('en')">English</button>
+      <button class="lang-btn" onclick="setLang('fa')">فارسی</button>
+      <button class="lang-btn active" onclick="setLang('en')">English</button>
     </div>
   </nav>
   <div id="content"></div>
@@ -404,7 +404,7 @@ function setLang(lang) {
     </div>`;
 }
 
-setLang('fa');
+setLang('en');
 </script>
 </body>
 </html>
