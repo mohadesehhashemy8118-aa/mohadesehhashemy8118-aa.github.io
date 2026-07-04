@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FoodCity — Case Study | Mohadeseh Hashemi</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #ffffff; --bg2: #faf8f5; --bg3: #f4f0eb;
+    --text: #1a1a1a; --text2: #5a5550; --text3: #9a9590;
+    --border: #ebe6e0; --border2: #d8d0c8;
+    --warm: #c8a882; --warm-light: #faf3ea; --warm-text: #7a5a30;
+    --dark: #181f18; --dark-light: #eaecea; --dark-text: #181f18;
+    --radius: 12px; --radius-sm: 8px;
+    --font: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    --font-fa: 'Vazirmatn', 'Segoe UI', Tahoma, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #181614; --bg2: #201e1b; --bg3: #262320;
+      --text: #f0ede8; --text2: #a8a098; --text3: #686058;
+      --border: #302c28; --border2: #403c38;
+      --warm-light: #2a2018; --warm-text: #d4a870;
+      --dark-light: #1e221e; --dark-text: #a0c0a0;
+    }
+  }
+  html { font-size: 16px; scroll-behavior: smooth; }
+  body { font-family: var(--font); background: var(--bg); color: var(--text); line-height: 1.7; direction: ltr; }
+  body.rtl { font-family: var(--font-fa); direction: rtl; text-align: right; }
+  .container { max-width: 760px; margin: 0 auto; padding: 0 1.5rem 5rem; }
+
+  .nav { padding: 1.25rem 0; margin-bottom: 2.5rem; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
+  .nav-back { font-size: 13px; color: var(--text2); text-decoration: none; display: flex; align-items: center; gap: 6px; transition: color .18s; }
+  .nav-back:hover { color: var(--text); }
+  .rtl .nav-back { flex-direction: row-reverse; }
+  .lang-toggle { display: flex; gap: 8px; }
+  .lang-btn { padding: 5px 14px; border-radius: 20px; border: 1px solid var(--border2); background: transparent; cursor: pointer; font-size: 12px; color: var(--text2); font-family: inherit; transition: all .18s; }
+  .lang-btn.active { background: var(--bg2); color: var(--text); font-weight: 500; }
+
+  .hero { margin-bottom: 2.5rem; }
+  .hero-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 1rem; }
+  .tag { font-size: 12px; padding: 3px 12px; border-radius: 20px; font-weight: 500; }
+  .tag-warm { background: var(--warm-light); color: var(--warm-text); }
+  .tag-dark { background: var(--dark-light); color: var(--dark-text); }
+  .hero-title { font-size: 32px; font-weight: 600; line-height: 1.25; margin-bottom: .75rem; }
+  .hero-subtitle { font-size: 16px; color: var(--text2); max-width: 600px; line-height: 1.75; }
+
+  .meta-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; margin: 2rem 0 3rem; }
+  .meta-item { background: var(--bg2); padding: .9rem 1.25rem; }
+  .meta-label { font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: var(--text3); margin-bottom: .3rem; }
+  .meta-value { font-size: 14px; font-weight: 500; color: var(--text); }
+
+  .cover { border-radius: var(--radius); overflow: hidden; margin-bottom: 3rem; background: #e8e4e0; }
+  .cover img { width: 100%; max-height: 420px; object-fit: cover; object-position: center; display: block; }
+
+  .divider { height: 1px; background: var(--border); margin: 2.5rem 0; }
+  .section { margin-bottom: 3rem; }
+  .section-num { font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--text3); margin-bottom: .5rem; }
+  .section-title { font-size: 22px; font-weight: 600; margin-bottom: 1rem; line-height: 1.3; }
+  .section-body { font-size: 15px; color: var(--text2); line-height: 1.8; }
+  .section-body p { margin-bottom: 1rem; }
+  .section-body p:last-child { margin-bottom: 0; }
+
+  .callout { background: var(--warm-light); border-left: 3px solid var(--warm); border-radius: var(--radius-sm); padding: 1rem 1.25rem; margin: 1.5rem 0; font-size: 15px; color: var(--warm-text); line-height: 1.7; }
+  .rtl .callout { border-left: none; border-right: 3px solid var(--warm); }
+
+  .honest-note { background: var(--bg3); border: 1px solid var(--border2); border-radius: var(--radius-sm); padding: 1rem 1.25rem; margin: 1.5rem 0; font-size: 14px; color: var(--text2); line-height: 1.7; font-style: italic; }
+
+  .features { display: flex; flex-direction: column; gap: 12px; margin: 1.5rem 0; }
+  .feature-item { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 1rem 1.25rem; }
+  .feature-title { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: .3rem; }
+  .feature-desc { font-size: 14px; color: var(--text2); line-height: 1.65; }
+
+  /* Color palette */
+  .color-palette { display: flex; gap: 10px; margin: 1.5rem 0; flex-wrap: wrap; }
+  .color-swatch { border-radius: var(--radius-sm); overflow: hidden; flex: 1; min-width: 100px; border: 1px solid var(--border); }
+  .color-fill { height: 56px; }
+  .color-info { padding: .5rem .75rem; background: var(--bg2); }
+  .color-name { font-size: 12px; font-weight: 600; color: var(--text); }
+  .color-hex { font-size: 11px; color: var(--text3); font-family: monospace; }
+
+  /* Screen images */
+  .screen-full { width: 100%; border-radius: var(--radius); box-shadow: 0 8px 32px rgba(0,0,0,.10); display: block; border: 1px solid var(--border); margin-top: 1.5rem; }
+  .screen-wrap { display: flex; justify-content: center; gap: 16px; margin: 2rem 0; flex-wrap: wrap; }
+  .screen-mobile { width: 240px; border-radius: 20px; box-shadow: 0 8px 28px rgba(0,0,0,.12); display: block; border: 1px solid var(--border); }
+  .screen-mockup { width: 260px; border-radius: 8px; box-shadow: 0 8px 32px rgba(0,0,0,.10); display: block; }
+
+  .reflection { background: var(--bg3); border-radius: var(--radius); padding: 1.5rem; margin: 1.5rem 0; border: 1px solid var(--border2); }
+
+  .nav-bottom { margin-top: 4rem; padding-top: 2rem; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+  .nav-bottom a { font-size: 14px; color: var(--text2); text-decoration: none; display: flex; align-items: center; gap: 6px; padding: 8px 16px; border: 1px solid var(--border2); border-radius: var(--radius-sm); transition: all .18s; }
+  .nav-bottom a:hover { background: var(--bg2); color: var(--text); }
+
+  @media (max-width: 480px) {
+    .hero-title { font-size: 24px; }
+    .screen-mobile { width: 100%; max-width: 280px; }
+    .color-swatch { min-width: 80px; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <nav class="nav">
+    <a class="nav-back" href="../index.html" id="navBack">← Back to portfolio</a>
+    <div class="lang-toggle">
+      <button class="lang-btn" onclick="setLang('fa')">فارسی</button>
+      <button class="lang-btn active" onclick="setLang('en')">English</button>
+    </div>
+  </nav>
+  <div id="content"></div>
+</div>
+
+<script>
+const IMG = 'img/foodcity/';
+
+const c = {
+  en: {
+    dir:'ltr', cls:'',
+    navBack:'← Back to portfolio',
+    tags:[
+      { text:'Student Project', cls:'tag-warm' },
+      { text:'Mobile App', cls:'tag-dark' },
+    ],
+    title:'FoodCity',
+    subtitle:'A mobile app for discovering and ordering traditional Iranian cuisine — regional categories, local flavors, and homemade recipes, just a few clicks away.',
+    meta:[
+      { label:'Type', value:'Student Project' },
+      { label:'Domain', value:'UI/UX Design' },
+      { label:'Tool', value:'Figma' },
+      { label:'Year', value:'2023' },
+    ],
+    honestNote:'This was my first design project — created for someone as a student. I know there are areas where it doesn\'t meet professional standards, but it holds a special place in my journey. Each mistake in FoodCity became a lesson I applied in every project after.',
+    sections:[
+      {
+        num:'01', title:'Project Concept',
+        body:`<p>FoodCity was born from a simple observation: Iran is home to dozens of distinct regional cuisines — from Gilani stews to Khorasani rice dishes — yet most food delivery apps treat all of them the same way.</p><p>The concept was to build an app that celebrates the geographic diversity of Iranian food, letting users explore dishes not just by category, but by the province they come from.</p>`,
+        imgs:['01-cover.png'], imgType:'full',
+      },
+      {
+        num:'02', title:'Visual Identity',
+        body:`<p>The color palette was intentionally minimal and warm — a cream background and dark charcoal, inspired by the texture of traditional Iranian tableware and clay pottery. The goal was to let the food photography breathe without visual competition from the UI.</p>`,
+        colors:[
+          { name:'Cream White', hex:'#F6EFEF', fill:'#F6EFEF', dark:false },
+          { name:'Light Gray', hex:'#E1E1E1', fill:'#E1E1E1', dark:false },
+          { name:'Charcoal', hex:'#181F18', fill:'#383f38', dark:true },
+          { name:'Deep Black', hex:'#181F18', fill:'#181F18', dark:true },
+        ],
+        colorNote:'Minimal palette — two neutrals let the food imagery take center stage, while the dark charcoal grounds the interface.',
+        imgs:['07-colors.png'], imgType:'full',
+      },
+      {
+        num:'03', title:'Home Screen — Exploring by Region',
+        body:`<p>The home screen was designed around the idea of a culinary journey across Iran. A hero banner sets the mood ("Travel with the taste of Iranian cities"), followed by a regional filter tab that lets users browse by province — a feature that differentiates FoodCity from generic food delivery apps.</p>`,
+        features:[
+          { title:'Location-aware header', desc:'Shows the user\'s current city at the top, making the experience feel local and personal from the first screen.' },
+          { title:'Regional tabs (Favorite Provinces)', desc:'Quick-filter tabs for top provinces (Khorasan, Mazandaran, Gilan) let users jump to regional specialties in one tap.' },
+          { title:'Food card grid', desc:'Two-column grid with dish name, short description, price, and add-to-cart button — all the information needed to decide, without opening the detail page.' },
+        ],
+        imgs:['02-home.png'], imgType:'mobile',
+      },
+      {
+        num:'04', title:'Category System — Province-First Navigation',
+        body:`<p>The category screen is where FoodCity\'s core idea comes to life. Instead of just "kebab" or "stew", users can filter by both dish type (daily categories) and geographic origin (provincial categories). This dual-axis navigation was the most technically complex part of the UX to design.</p>`,
+        imgs:['04-category.png', '05-filtered.png'], imgType:'two',
+      },
+      {
+        num:'05', title:'Food Detail — Story Behind the Dish',
+        body:`<p>Each dish has its own page with a full-bleed photo, origin province, a description of the dish\'s history and ingredients, and a comments section. The add-to-cart bar is fixed at the bottom — always accessible without scrolling back up.</p>`,
+        features:[
+          { title:'Origin label', desc:'Every dish shows its home province — reinforcing the regional identity concept throughout the app.' },
+          { title:'Recipe link', desc:'A "How to make this dish" option lets users who want to cook at home access the recipe — expanding the app beyond just delivery.' },
+          { title:'Fixed bottom CTA', desc:'Price and add-to-cart always visible at the bottom, regardless of scroll position.' },
+        ],
+        imgs:['03-detail.png'], imgType:'mobile',
+      },
+      {
+        num:'06', title:'Phone Mockup',
+        body:`<p>The home screen presented in a device frame — showing how the warm color palette and food photography translate to real phone proportions.</p>`,
+        imgs:['06-mockup.png'], imgType:'mockup',
+      },
+      {
+        num:'07', title:'What I Learned',
+        reflection:true,
+        body:`<p>FoodCity was my first real design project, and looking back, I can see both what I did well and where I would do things differently today.</p>`,
+        lessons:[
+          { title:'What worked', desc:'The regional categorization idea was genuinely original — it gave the app a clear identity beyond "another food delivery clone". The minimal color palette was a strong, confident choice.' },
+          { title:'What I would improve', desc:'Typography hierarchy and spacing needed more attention — some screens feel crowded. I would also add more user research before designing the navigation structure.' },
+          { title:'How it shaped me', desc:'Every project I designed after FoodCity became more intentional because of what I learned here. Imperfect first projects are how growth happens.' },
+        ],
+        imgs:[], imgType:'none',
+      },
+    ],
+    navBack2:'← Back to portfolio',
+    navNext:'Next project →',
+  },
+  fa: {
+    dir:'rtl', cls:'rtl',
+    navBack:'← بازگشت به پورتفولیو',
+    tags:[
+      { text:'پروژه دانشجویی', cls:'tag-warm' },
+      { text:'اپلیکیشن موبایل', cls:'tag-dark' },
+    ],
+    title:'فودسیتی',
+    subtitle:'اپلیکیشن موبایلی برای کشف و سفارش غذاهای سنتی ایرانی — دسته‌بندی استانی، طعم‌های محلی، و دستور پخت خانگی، فقط با چند کلیک.',
+    meta:[
+      { label:'نوع پروژه', value:'پروژه دانشجویی' },
+      { label:'حوزه', value:'UI/UX Design' },
+      { label:'ابزار', value:'Figma' },
+      { label:'سال', value:'۱۴۰۲' },
+    ],
+    honestNote:'این اولین پروژه طراحیم بود — برای یک کلاینت به عنوان پروژه دانشجویی طراحی کردم. می‌دونم جاهایی هست که با استانداردهای حرفه‌ای فاصله داره، ولی جایگاه خاصی در مسیرم داره. هر اشتباه در فودسیتی، درسی شد که در پروژه‌های بعدی اعمال کردم.',
+    sections:[
+      {
+        num:'۰۱', title:'ایده پروژه',
+        body:`<p>فودسیتی از یک مشاهده ساده شکل گرفت: ایران خانه ده‌ها آشپزی منطقه‌ای متمایز است — از خورش‌های گیلانی تا پلوهای خراسانی — اما اکثر اپ‌های سفارش غذا همه را یکسان در نظر می‌گیرند.</p><p>ایده این بود که اپی بسازم که تنوع جغرافیایی غذای ایرانی را جشن بگیرد — کاربران بتوانند غذاها را نه فقط بر اساس دسته‌بندی، بلکه بر اساس استان مبدا کشف کنند.</p>`,
+        imgs:['01-cover.png'], imgType:'full',
+      },
+      {
+        num:'۰۲', title:'هویت بصری',
+        body:`<p>پالت رنگی عمداً مینیمال و گرم انتخاب شد — پس‌زمینه کِرِم و زغالی تیره، الهام‌گرفته از بافت ظروف سنتی ایرانی و سفالینه‌های محلی. هدف این بود که عکاسی غذا بدون رقابت بصری از طرف UI نفس بکشد.</p>`,
+        colors:[
+          { name:'کرم سفید', hex:'#F6EFEF', fill:'#F6EFEF', dark:false },
+          { name:'خاکستری روشن', hex:'#E1E1E1', fill:'#E1E1E1', dark:false },
+          { name:'زغالی', hex:'#181F18', fill:'#383f38', dark:true },
+          { name:'مشکی عمیق', hex:'#181F18', fill:'#181F18', dark:true },
+        ],
+        colorNote:'پالت مینیمال — دو رنگ خنثی اجازه می‌دهند عکاسی غذا محور توجه باشد، در حالی که زغالی تیره رابط را محکم می‌کند.',
+        imgs:['07-colors.png'], imgType:'full',
+      },
+      {
+        num:'۰۳', title:'صفحه اصلی — کشف بر اساس منطقه',
+        body:`<p>صفحه اصلی حول ایده سفر آشپزی در ایران طراحی شد. یک بنر هیرو حال‌وهوا را می‌سازد ("سفر کن با طعم به شهرهای ایران")، و تب استانی به کاربر اجازه می‌دهد با یک ضربه به غذاهای منطقه‌ای مورد علاقه‌اش برسد.</p>`,
+        features:[
+          { title:'هدر مبتنی بر موقعیت', desc:'شهر فعلی کاربر در بالا نمایش داده می‌شود و تجربه را از اولین صفحه محلی و شخصی می‌کند.' },
+          { title:'تب‌های استانی', desc:'فیلتر سریع برای استان‌های محبوب (خراسان، مازندران، گیلان) تا با یک ضربه به غذاهای منطقه‌ای رسید.' },
+          { title:'گرید کارت غذا', desc:'گرید دو ستونه با نام غذا، توضیح کوتاه، قیمت و دکمه افزودن به سبد — تمام اطلاعات لازم برای تصمیم بدون باز کردن صفحه جزئیات.' },
+        ],
+        imgs:['02-home.png'], imgType:'mobile',
+      },
+      {
+        num:'۰۴', title:'سیستم دسته‌بندی — ناوبری استان‌محور',
+        body:`<p>صفحه دسته‌بندی جایی است که ایده اصلی فودسیتی زنده می‌شود. به جای فقط "کبابی" یا "خورشت"، کاربران می‌توانند هم بر اساس نوع غذا (دسته‌بندی روزانه) و هم بر اساس منشاء جغرافیایی (دسته‌بندی استانی) فیلتر کنند.</p>`,
+        imgs:['04-category.png', '05-filtered.png'], imgType:'two',
+      },
+      {
+        num:'۰۵', title:'صفحه جزئیات غذا — داستان پشت غذا',
+        body:`<p>هر غذا صفحه خود را دارد با عکس تمام‌صفحه، استان مبدا، توضیح تاریخچه و مواد اولیه، و بخش نظرات. نوار افزودن به سبد در پایین ثابت است و همیشه در دسترس، بدون نیاز به اسکرول.</p>`,
+        features:[
+          { title:'برچسب مبدا استانی', desc:'هر غذا استان خانگی خود را نشان می‌دهد — هویت منطقه‌ای را در سراسر اپ تقویت می‌کند.' },
+          { title:'لینک دستور پخت', desc:'گزینه "طرز تهیه این غذا" به کاربرانی که می‌خواهند در خانه بپزند دسترسی می‌دهد — اپ را فراتر از سفارش گسترش می‌دهد.' },
+          { title:'CTA ثابت پایین', desc:'قیمت و افزودن به سبد همیشه در پایین قابل مشاهده است، صرف‌نظر از موقعیت اسکرول.' },
+        ],
+        imgs:['03-detail.png'], imgType:'mobile',
+      },
+      {
+        num:'۰۶', title:'موکاپ گوشی',
+        body:`<p>صفحه اصلی در قاب یک دستگاه واقعی — نشان می‌دهد پالت رنگ گرم و عکاسی غذا چگونه در نسبت‌های واقعی گوشی ترجمه می‌شوند.</p>`,
+        imgs:['06-mockup.png'], imgType:'mockup',
+      },
+      {
+        num:'۰۷', title:'چیزی که یاد گرفتم',
+        reflection:true,
+        body:`<p>فودسیتی اولین پروژه طراحی واقعی من بود. نگاه به عقب، می‌بینم هم چه چیزی درست انجام دادم و هم کجاها امروز متفاوت عمل می‌کردم.</p>`,
+        lessons:[
+          { title:'چه چیزی خوب بود', desc:'ایده دسته‌بندی استانی واقعاً اورجینال بود — به اپ هویتی متمایز از کلون‌های سفارش غذا داد. پالت رنگ مینیمال انتخاب قوی و مطمئنی بود.' },
+          { title:'چه چیزی را بهبود می‌دادم', desc:'سلسله‌مراتب تایپوگرافی و فاصله‌گذاری نیاز به توجه بیشتر داشت — برخی صفحات شلوغ به نظر می‌رسند. قبل از طراحی ساختار ناوبری، تحقیق کاربری بیشتری انجام می‌دادم.' },
+          { title:'چطور مسیرم را شکل داد', desc:'هر پروژه‌ای که بعد از فودسیتی طراحی کردم، به خاطر آنچه اینجا یاد گرفتم آگاهانه‌تر بود. پروژه‌های اول ناقص، راه رشد هستند.' },
+        ],
+        imgs:[], imgType:'none',
+      },
+    ],
+    navBack2:'← بازگشت به پورتفولیو',
+    navNext:'پروژه بعدی ←',
+  }
+};
+
+function renderSection(s) {
+  let html = `<div class="section">
+    <div class="section-num">${s.num}</div>
+    <div class="section-title">${s.title}</div>`;
+
+  if (!s.reflection) html += `<div class="section-body">${s.body}</div>`;
+
+  if (s.colors) {
+    html += `<div class="color-palette">` + s.colors.map(col =>
+      `<div class="color-swatch">
+        <div class="color-fill" style="background:${col.fill}"></div>
+        <div class="color-info">
+          <div class="color-name">${col.name}</div>
+          <div class="color-hex">${col.hex}</div>
+        </div>
+      </div>`).join('') + `</div>`;
+    if (s.colorNote) html += `<div class="callout">${s.colorNote}</div>`;
+  }
+
+  if (s.features) {
+    html += `<div class="features">` + s.features.map(f =>
+      `<div class="feature-item">
+        <div class="feature-title">${f.title}</div>
+        <div class="feature-desc">${f.desc}</div>
+      </div>`).join('') + `</div>`;
+  }
+
+  if (s.reflection) {
+    html += `<div class="reflection"><div class="section-body">${s.body}</div></div>`;
+  }
+
+  if (s.lessons) {
+    html += `<div class="features">` + s.lessons.map(f =>
+      `<div class="feature-item">
+        <div class="feature-title">← ${f.title}</div>
+        <div class="feature-desc">${f.desc}</div>
+      </div>`).join('') + `</div>`;
+  }
+
+  if (s.imgs && s.imgs.length) {
+    if (s.imgType === 'mobile') {
+      html += `<div class="screen-wrap">` +
+        s.imgs.map(img => `<img class="screen-mobile" src="${IMG}${img}" alt="${s.title}" loading="lazy">`).join('') +
+        `</div>`;
+    } else if (s.imgType === 'two') {
+      html += `<div class="screen-wrap">` +
+        s.imgs.map(img => `<img class="screen-mobile" src="${IMG}${img}" alt="${s.title}" loading="lazy">`).join('') +
+        `</div>`;
+    } else if (s.imgType === 'mockup') {
+      html += `<div class="screen-wrap">` +
+        s.imgs.map(img => `<img class="screen-mockup" src="${IMG}${img}" alt="${s.title}" loading="lazy">`).join('') +
+        `</div>`;
+    } else {
+      html += s.imgs.map(img =>
+        `<img class="screen-full" src="${IMG}${img}" alt="${s.title}" loading="lazy">`).join('');
+    }
+  }
+
+  html += `</div><div class="divider"></div>`;
+  return html;
+}
+
+function setLang(lang) {
+  const d = c[lang];
+  document.documentElement.lang = lang;
+  document.documentElement.dir = d.dir;
+  document.body.className = d.cls;
+  document.querySelector('#navBack').textContent = d.navBack;
+  document.querySelectorAll('.lang-btn').forEach(b => {
+    b.classList.toggle('active', b.textContent.trim() === (lang==='fa'?'فارسی':'English'));
+  });
+
+  const tagHtml = d.tags.map(t=>`<span class="tag ${t.cls}">${t.text}</span>`).join('');
+  const metaHtml = d.meta.map(m=>`<div class="meta-item"><div class="meta-label">${m.label}</div><div class="meta-value">${m.value}</div></div>`).join('');
+  const sectionsHtml = d.sections.map(renderSection).join('');
+
+  document.getElementById('content').innerHTML = `
+    <div class="hero">
+      <div class="hero-tags">${tagHtml}</div>
+      <div class="hero-title">${d.title}</div>
+      <div class="hero-subtitle">${d.subtitle}</div>
+    </div>
+    <div class="meta-row">${metaHtml}</div>
+    <div class="honest-note">💛 ${d.honestNote}</div>
+    <div class="cover"><img src="${IMG}01-cover.png" alt="FoodCity"></div>
+    <div class="divider"></div>
+    ${sectionsHtml}
+    <div class="nav-bottom">
+      <a href="../index.html">${d.navBack2}</a>
+      <a href="#">${d.navNext}</a>
+    </div>`;
+}
+
+setLang('en');
+</script>
+</body>
+</html>
