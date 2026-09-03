@@ -7,12 +7,12 @@
 <style>
   /* ── Reset ── */
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
+ 
   /* ── Fonts (system stack — no external request needed) ── */
   :root {
     --font: 'Segoe UI', system-ui, -apple-system, sans-serif;
     --font-fa: 'Vazirmatn', 'Segoe UI', Tahoma, sans-serif;
-
+ 
     --bg: #ffffff;
     --bg2: #f7f7fa;
     --text: #1a1a1e;
@@ -30,7 +30,7 @@
     --radius: 10px;
     --radius-sm: 6px;
   }
-
+ 
   @media (prefers-color-scheme: dark) {
     :root {
       --bg: #141418;
@@ -49,9 +49,9 @@
       --amber-text: #fac775;
     }
   }
-
+ 
   html { font-size: 16px; scroll-behavior: smooth; }
-
+ 
   body {
     font-family: var(--font);
     background: var(--bg);
@@ -59,20 +59,20 @@
     line-height: 1.6;
     padding: 0 1.5rem;
   }
-
+ 
   body.rtl {
     font-family: var(--font-fa);
     direction: rtl;
     text-align: right;
   }
-
+ 
   /* ── Layout ── */
   .container {
     max-width: 720px;
     margin: 0 auto;
     padding: 3rem 0 4rem;
   }
-
+ 
   /* ── Language toggle ── */
   .lang-toggle {
     display: flex;
@@ -80,7 +80,7 @@
     margin-bottom: 3rem;
   }
   .rtl .lang-toggle { flex-direction: row-reverse; }
-
+ 
   .lang-btn {
     padding: 6px 18px;
     border-radius: 20px;
@@ -99,7 +99,7 @@
     font-weight: 500;
   }
   .lang-btn:hover { border-color: var(--accent); color: var(--text); }
-
+ 
   /* ── Hero ── */
   .hero { margin-bottom: 3rem; }
   .hero-label {
@@ -145,14 +145,14 @@
     color: var(--text);
     background: var(--bg2);
   }
-
+ 
   /* ── Divider ── */
   .divider {
     height: 1px;
     background: var(--border);
     margin: 2.5rem 0;
   }
-
+ 
   /* ── Section label ── */
   .section-label {
     font-size: 11px;
@@ -161,10 +161,10 @@
     color: var(--text3);
     margin-bottom: 1.25rem;
   }
-
+ 
   /* ── Project cards ── */
   .projects { display: flex; flex-direction: column; gap: 12px; }
-
+ 
   .project-card {
     background: var(--bg);
     border: 1px solid var(--border);
@@ -176,7 +176,17 @@
     transition: border-color .18s;
   }
   .project-card:hover { border-color: var(--border2); }
-
+ 
+  /* Disabled / coming-soon card */
+  .project-disabled {
+    cursor: default;
+    opacity: .65;
+  }
+  .project-disabled:hover { border-color: var(--border); }
+ 
+  .project-tags { display: flex; gap: 6px; flex-shrink: 0; }
+  .rtl .project-tags { flex-direction: row-reverse; }
+ 
   .project-top {
     display: flex;
     align-items: flex-start;
@@ -185,7 +195,7 @@
     margin-bottom: .5rem;
   }
   .rtl .project-top { flex-direction: row-reverse; }
-
+ 
   .project-title {
     font-size: 16px;
     font-weight: 500;
@@ -202,7 +212,8 @@
   .tag-ux    { background: var(--accent-bg);  color: var(--accent-text); }
   .tag-re    { background: var(--green-bg);   color: var(--green-text);  }
   .tag-st    { background: var(--amber-bg);   color: var(--amber-text);  }
-
+  .tag-soon  { background: var(--amber-bg);   color: var(--amber-text);  }
+ 
   .project-desc {
     font-size: 14px;
     color: var(--text2);
@@ -219,7 +230,7 @@
     font-size: 12px;
     color: var(--text3);
   }
-
+ 
   /* ── Skills ── */
   .skills-grid {
     display: grid;
@@ -233,7 +244,7 @@
     font-size: 13px;
     color: var(--text2);
   }
-
+ 
   /* ── Contact ── */
   .contact-row { display: flex; gap: 10px; flex-wrap: wrap; }
   .rtl .contact-row { flex-direction: row-reverse; }
@@ -253,14 +264,14 @@
     transition: all .18s;
   }
   .contact-btn:hover { background: var(--bg2); color: var(--text); }
-
+ 
   /* ── Footer ── */
   .footer {
     margin-top: 3rem;
     font-size: 12px;
     color: var(--text3);
   }
-
+ 
   /* ── Responsive ── */
   @media (max-width: 480px) {
     .hero-name { font-size: 28px; }
@@ -271,37 +282,37 @@
 </head>
 <body>
 <div class="container">
-
+ 
   <div class="lang-toggle">
     <button class="lang-btn active" onclick="setLang('en')">English</button>
     <button class="lang-btn" onclick="setLang('fa')">فارسی</button>
   </div>
-
+ 
   <!-- Hero -->
   <section class="hero" id="hero"></section>
-
+ 
   <div class="divider"></div>
-
+ 
   <!-- Projects -->
   <div class="section-label" id="projLabel"></div>
   <div class="projects" id="projects"></div>
-
+ 
   <div class="divider"></div>
-
+ 
   <!-- Skills -->
   <div class="section-label" id="skillsLabel"></div>
   <div class="skills-grid" id="skills"></div>
-
+ 
   <div class="divider"></div>
-
+ 
   <!-- Contact -->
   <div class="section-label" id="contactLabel"></div>
   <div class="contact-row" id="contact"></div>
-
+ 
   <div class="footer" id="footer"></div>
-
+ 
 </div>
-
+ 
 <script>
 /* ─── Content ─── */
 const content = {
@@ -316,12 +327,14 @@ const content = {
       { label: 'Call',    href: 'tel:+989027322122',                  icon: '☎' },
     ],
     projLabel: 'Selected work',
+    comingSoonLabel: 'Coming soon',
     projects: [
       { title: 'Avaye Wal',                    tag: 'UI/UX Design',   tagClass: 'tag-re', desc: 'Mobile app for anxiety and mental health management — inspired by the world of whales.',                            year: '2022', type: 'Case study',      slug: 'avaye-wal' },
       { title: 'Elderly Care App',             tag: 'UI/UX Design',   tagClass: 'tag-re', desc: 'Accessible mobile interface for elderly care coordination — large type, high contrast, and simplified navigation.',   year: '2022', type: 'Case study',      slug: 'elderly-care' },
       { title: 'FoodCity',                     tag: 'UI/UX Design',   tagClass: 'tag-st', desc: 'Mobile app for discovering traditional Iranian cuisine — regional categories and homemade flavors.',                  year: '2023', type: 'Student project', slug: 'foodcity' },
       { title: 'SPMS — Ostandari Redesign',    tag: 'Redesign',       tagClass: 'tag-re', desc: 'Redesign of a government administrative system to improve usability and simplify complex multi-step workflows.',       year: '2024', type: 'Case study',      slug: 'spms' },
       { title: 'Lotus Parsian Hotel',          tag: 'UI Design',      tagClass: 'tag-ux', desc: 'Website UI design for a luxury hotel brand — focused on elegant visual hierarchy and a smooth booking experience.',   year: '2023', type: 'Client project',  slug: 'lotus-parsian-hotel' },
+      { title: 'Pars Next',                    tag: 'Landing Page',   tagClass: 'tag-ux', desc: 'RTL 3D interactive landing page for Pars Next, built with an extruded logo hero in Three.js.',                       year: '2026', type: 'Client project',  slug: 'pars-next', comingSoon: true },
     ],
     skillsLabel: 'Skills & tools',
     skills: ['Figma', 'User Research', 'Wireframing', 'Prototyping', 'Usability Testing', 'Information Architecture', 'Visual Design', 'Design Systems'],
@@ -344,6 +357,7 @@ const content = {
       { label: 'تماس',    href: 'tel:+989027322122',                 icon: '☎' },
     ],
     projLabel: 'نمونه کارها',
+    comingSoonLabel: 'به‌زودی',
     projects: [
       { title: 'آوای وال',                   tag: 'UI/UX Design',      tagClass: 'tag-re', desc: 'اپلیکیشن موبایلی برای مدیریت اضطراب و سلامت روان — با هویتی الهام‌گرفته از دنیای وال‌ها.', year: '۱۴۰۱', type: 'کیس استادی',      slug: 'avaye-wal' },
       { title: 'مراقبت از سالمندان',        tag: 'UI/UX Design',      tagClass: 'tag-re', desc: 'رابط موبایلی دسترس‌پذیر برای هماهنگی مراقبت از سالمندان با تأکید بر تایپوگرافی بزرگ و ناوبری ساده.', year: '۱۴۰۱', type: 'کیس استادی',      slug: 'elderly-care' },
@@ -351,6 +365,7 @@ const content = {
       { title: 'SPMS — ریدیزاین استانداری', tag: 'Redesign',          tagClass: 'tag-re', desc: 'طراحی مجدد سیستم اداری استانداری برای بهبود قابلیت استفاده و ساده‌سازی فرآیندهای چندمرحله‌ای پیچیده.', year: '۱۴۰۳', type: 'کیس استادی',      slug: 'spms' },
       { title: 'هتل لتوس پارسیان',          tag: 'UI Design',         tagClass: 'tag-ux', desc: 'طراحی رابط کاربری وب‌سایت برای یک برند هتل لوکس با تأکید بر سلسله‌مراتب بصری و تجربه رزرو روان.', year: '۱۴۰۲', type: 'پروژه کلاینت',  slug: 'lotus-parsian-hotel' },
       { title: 'مراقبت از سالمندان',        tag: 'کیس استادی',    tagClass: 'tag-re', desc: 'رابط موبایلی دسترس‌پذیر برای هماهنگی مراقبت از سالمندان با تأکید بر تایپوگرافی بزرگ و ناوبری ساده.', year: '۱۴۰۱', type: 'کیس استادی' },
+      { title: 'پارس نکست',                 tag: 'صفحه فرود',       tagClass: 'tag-ux', desc: 'صفحه فرود تعاملی سه‌بعدی (راست‌به‌چپ) برای پارس نکست، با هیرو اختصاصی Three.js ساخته‌شده از لوگوی برند.', year: '۱۴۰۵', type: 'پروژه کلاینت', slug: 'pars-next', comingSoon: true },
     ],
     skillsLabel: 'مهارت‌ها و ابزارها',
     skills: ['فیگما', 'تحقیق کاربری', 'وایرفریمینگ', 'پروتوتایپ', 'تست قابلیت استفاده', 'معماری اطلاعات', 'طراحی بصری', 'سیستم طراحی'],
@@ -363,7 +378,7 @@ const content = {
     footer: '© ۱۴۰۳ محدثه هاشمی — ساخته‌شده با HTML و هاست‌شده روی GitHub Pages',
   }
 };
-
+ 
 /* ─── Render ─── */
 function setLang(lang) {
   const d = content[lang];
@@ -371,11 +386,11 @@ function setLang(lang) {
   document.documentElement.dir = d.dir;
   document.title = lang === 'fa' ? 'محدثه هاشمی — طراح UI/UX' : 'Mohadeseh Hashemi — UI/UX Designer';
   document.body.className = d.dir === 'rtl' ? 'rtl' : '';
-
+ 
   document.querySelectorAll('.lang-btn').forEach(b => {
     b.classList.toggle('active', b.textContent.trim() === (lang === 'en' ? 'English' : 'فارسی'));
   });
-
+ 
   document.getElementById('hero').innerHTML = `
     <div class="hero-label">${d.heroLabel}</div>
     <div class="hero-name">${d.heroName}</div>
@@ -383,35 +398,44 @@ function setLang(lang) {
     <div class="hero-links">
       ${d.heroLinks.map(l => `<a class="hero-link" href="${l.href}">${l.icon} ${l.label}</a>`).join('')}
     </div>`;
-
+ 
   document.getElementById('projLabel').textContent = d.projLabel;
-  document.getElementById('projects').innerHTML = d.projects.map(p => `
-    <a class="project-card" href="projects/${p.slug}.html">
+  document.getElementById('projects').innerHTML = d.projects.map(p => {
+    const tag = p.comingSoon ? 'div' : 'a';
+    const hrefAttr = p.comingSoon ? '' : `href="projects/${p.slug}.html"`;
+    const cardClass = 'project-card' + (p.comingSoon ? ' project-disabled' : '');
+    const soonBadge = p.comingSoon ? `<span class="project-tag tag-soon">${d.comingSoonLabel}</span>` : '';
+    return `
+    <${tag} class="${cardClass}" ${hrefAttr}>
       <div class="project-top">
         <div class="project-title">${p.title}</div>
-        <span class="project-tag ${p.tagClass}">${p.tag}</span>
+        <div class="project-tags">
+          <span class="project-tag ${p.tagClass}">${p.tag}</span>
+          ${soonBadge}
+        </div>
       </div>
       <div class="project-desc">${p.desc}</div>
       <div class="project-meta">
         <span>${p.year}</span>
         <span>${p.type}</span>
       </div>
-    </a>`).join('');
-
+    </${tag}>`;
+  }).join('');
+ 
   document.getElementById('skillsLabel').textContent = d.skillsLabel;
   document.getElementById('skills').innerHTML = d.skills.map(s => `<div class="skill-item">${s}</div>`).join('');
-
+ 
   document.getElementById('contactLabel').textContent = d.contactLabel;
   document.getElementById('contact').innerHTML = d.contactLinks.map(l =>
     `<a class="contact-btn" href="${l.href}">${l.label}</a>`).join('');
-
+ 
   document.getElementById('footer').textContent = d.footer;
 }
-
+ 
 function slugify(str) {
   return str.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
 }
-
+ 
 setLang('en');
 </script>
 </body>
