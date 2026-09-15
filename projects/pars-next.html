@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pars Next — Case Study</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --font: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    --font-fa: 'Vazirmatn', 'Segoe UI', Tahoma, sans-serif;
+
+    --bg: #ffffff;
+    --bg2: #f7f7fa;
+    --text: #1a1a1e;
+    --text2: #5a5a6a;
+    --text3: #9898a8;
+    --border: #e8e8ef;
+    --border2: #d0d0dc;
+    --accent: #4a4e8c;
+    --accent-bg: #eeedfe;
+    --accent-text: #3c3489;
+    --radius: 10px;
+    --radius-sm: 6px;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #141418;
+      --bg2: #1e1e24;
+      --text: #f0f0f5;
+      --text2: #a0a0b0;
+      --text3: #606070;
+      --border: #2a2a34;
+      --border2: #38384a;
+      --accent: #7a7fc8;
+      --accent-bg: #26215c;
+      --accent-text: #cecbf6;
+    }
+  }
+
+  html { font-size: 16px; scroll-behavior: smooth; }
+  body {
+    font-family: var(--font);
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    padding: 0 1.5rem;
+  }
+  body.rtl { font-family: var(--font-fa); direction: rtl; text-align: right; }
+
+  .container { max-width: 720px; margin: 0 auto; padding: 3rem 0 4rem; }
+
+  .top-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2.5rem; }
+  .rtl .top-row { flex-direction: row-reverse; }
+
+  .back-link {
+    font-size: 13px; color: var(--text2); text-decoration: none;
+    display: inline-flex; align-items: center; gap: 6px;
+  }
+  .back-link:hover { color: var(--text); }
+
+  .lang-toggle { display: flex; gap: 8px; }
+  .rtl .lang-toggle { flex-direction: row-reverse; }
+  .lang-btn {
+    padding: 6px 18px; border-radius: 20px; border: 1px solid var(--border2);
+    background: transparent; cursor: pointer; font-size: 13px; color: var(--text2);
+    font-family: inherit; transition: all .18s;
+  }
+  .lang-btn.active { background: var(--bg2); color: var(--text); border-color: var(--border2); font-weight: 500; }
+  .lang-btn:hover { border-color: var(--accent); color: var(--text); }
+
+  .tag-row { display: flex; gap: 8px; margin-bottom: 1rem; flex-wrap: wrap; }
+  .rtl .tag-row { flex-direction: row-reverse; }
+  .tag {
+    font-size: 11px; padding: 3px 12px; border-radius: 20px; font-weight: 500;
+    background: var(--accent-bg); color: var(--accent-text);
+  }
+
+  h1 { font-size: 32px; font-weight: 500; line-height: 1.2; margin-bottom: 1rem; }
+
+  .meta-row { display: flex; gap: 20px; margin-bottom: 2rem; flex-wrap: wrap; }
+  .rtl .meta-row { flex-direction: row-reverse; }
+  .meta-item span { display: block; font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: .05em; margin-bottom: 3px; }
+  .meta-item strong { font-size: 14px; font-weight: 500; }
+
+  .divider { height: 1px; background: var(--border); margin: 2.25rem 0; }
+
+  .section-label {
+    font-size: 11px; letter-spacing: .1em; text-transform: uppercase;
+    color: var(--text3); margin-bottom: .75rem;
+  }
+  .section-body { font-size: 15px; color: var(--text2); }
+  .section-body p { margin-bottom: .9rem; }
+  .section-body ul { padding-inline-start: 1.2rem; display: flex; flex-direction: column; gap: .5rem; }
+  .rtl .section-body ul { padding-inline-start: 0; padding-inline-end: 1.2rem; }
+
+  .shot {
+    width: 100%; border-radius: var(--radius);
+    border: 1px solid var(--border);
+    margin: .5rem 0 2rem;
+  }
+
+  .screens-gallery {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 16px;
+    align-items: start;
+    margin: .5rem 0 2rem;
+  }
+  .screens-gallery figure { margin: 0; }
+  .screens-gallery img {
+    width: 100%; border-radius: var(--radius);
+    border: 1px solid var(--border);
+    display: block;
+  }
+  .screens-gallery figcaption {
+    font-size: 12px; color: var(--text3); margin-top: 6px; text-align: center;
+  }
+  @media (max-width: 560px) {
+    .screens-gallery { grid-template-columns: 1fr; }
+  }
+
+  .footer { margin-top: 3rem; font-size: 12px; color: var(--text3); }
+
+  @media (max-width: 480px) {
+    h1 { font-size: 26px; }
+    .meta-row { gap: 14px; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <div class="top-row">
+    <a class="back-link" id="backLink" href="../index.html"></a>
+    <div class="lang-toggle">
+      <button class="lang-btn active" onclick="setLang('en')">English</button>
+      <button class="lang-btn" onclick="setLang('fa')">فارسی</button>
+    </div>
+  </div>
+
+  <div class="tag-row" id="tagRow"></div>
+  <h1 id="title"></h1>
+
+  <div class="meta-row" id="metaRow"></div>
+
+  <div class="divider"></div>
+
+  <div id="body"></div>
+
+  <div class="footer" id="footer"></div>
+
+</div>
+
+<script>
+const content = {
+  en: {
+    dir: 'ltr',
+    back: '← Back to portfolio',
+    tag: 'Landing Page',
+    title: 'Pars Next',
+    desktopCaption: 'Desktop',
+    mobileCaption: 'Mobile',
+    meta: [
+      { label: 'Year', value: '2026' },
+      { label: 'Type', value: 'Client project' },
+      { label: 'My role', value: 'UI/UX design' },
+    ],
+    sections: [
+      {
+        label: 'Overview',
+        body: '<p>Pars Next is a company offering web design, IT hardware, and digital-skills training. The site needed to introduce a brand new company to the market — so the main goal was making a strong, credible first impression rather than optimizing an existing funnel.</p>'
+      },
+      {
+        label: 'Challenge',
+        body: '<p>As a brand-new company with no existing audience, the landing page had to do double duty: explain three fairly different service lines (web design, hardware, training) clearly, while still feeling like one coherent, premium brand rather than a generic agency template.</p>'
+      },
+      {
+        label: 'My role & process',
+        body: `<ul>
+          <li>Defined a dark, navy-to-violet visual identity that reads as modern and tech-forward without feeling cold.</li>
+          <li>Designed the full page structure: hero, trust-building stats bar, services, portfolio preview, "why us," testimonial, and a closing call-to-action.</li>
+          <li>Designed a 3D-style hero concept built around the extruded brand logo, later implemented in Three.js by the development team.</li>
+          <li>Kept the layout fully RTL-first for Persian, since that's the primary audience.</li>
+        </ul>`
+      },
+      {
+        label: 'Tools',
+        body: '<p>Figma for UI design and prototyping.</p>'
+      },
+      {
+        label: 'Result',
+        body: '<p>A cohesive one-page site that introduces Pars Next\'s three service lines under a single, premium visual identity.</p>'
+      },
+    ],
+    footer: '© 2026 Mohadeseh Hashemi',
+  },
+  fa: {
+    dir: 'rtl',
+    back: '← بازگشت به پورتفولیو',
+    tag: 'صفحه فرود',
+    title: 'پارس نکست',
+    desktopCaption: 'نسخه دسکتاپ',
+    mobileCaption: 'نسخه موبایل',
+    meta: [
+      { label: 'سال', value: '۱۴۰۵' },
+      { label: 'نوع پروژه', value: 'پروژه کلاینت' },
+      { label: 'نقش من', value: 'طراحی UI/UX' },
+    ],
+    sections: [
+      {
+        label: 'معرفی پروژه',
+        body: '<p>پارس نکست مجموعه‌ای است که خدمات طراحی وب، تامین سخت‌افزار IT و دوره‌های آموزشی دیجیتال ارائه می‌دهد. این سایت باید یک برند کاملاً جدید را به بازار معرفی می‌کرد، پس هدف اصلی ساختن یک اولین تاثیر قوی و قابل‌اعتماد بود، نه بهینه‌سازی یک مسیر فروش موجود.</p>'
+      },
+      {
+        label: 'چالش',
+        body: '<p>چون پارس نکست یک برند تازه بدون مخاطب قبلی بود، صفحه فرود باید همزمان دو کار انجام می‌داد: معرفی شفاف سه خط خدماتی نسبتاً متفاوت (طراحی وب، سخت‌افزار، آموزش) و در عین حال حفظ حس یک برند یکپارچه و لوکس، نه یک قالب عمومی آژانسی.</p>'
+      },
+      {
+        label: 'نقش من و فرآیند کار',
+        body: `<ul>
+          <li>تعریف هویت بصری تیره با طیف سرمه‌ای تا بنفش که هم مدرن و تکنولوژیک باشه هم سرد و بی‌روح نباشه.</li>
+          <li>طراحی کامل ساختار صفحه: هیرو، نوار آماری برای جلب اعتماد، خدمات، پیش‌نمایش نمونه‌کارها، بخش «چرا ما»، نظر مشتری و بخش پایانی دعوت‌به‌اقدام.</li>
+          <li>طراحی مفهوم هیروی سه‌بعدی بر پایه لوگوی اکسترودشده برند، که بعداً توسط تیم توسعه با Three.js پیاده‌سازی شد.</li>
+          <li>چیدمان کاملاً راست‌به‌چپ و اول-فارسی، چون مخاطب اصلی سایت فارسی‌زبان بود.</li>
+        </ul>`
+      },
+      {
+        label: 'ابزارها',
+        body: '<p>فیگما برای طراحی رابط کاربری و پروتوتایپ.</p>'
+      },
+      {
+        label: 'نتیجه',
+        body: '<p>یک صفحه یکپارچه که سه خط خدماتی پارس نکست را زیر یک هویت بصری واحد و لوکس معرفی می‌کند.</p>'
+      },
+    ],
+    footer: '© ۱۴۰۵ محدثه هاشمی',
+  }
+};
+
+function setLang(lang) {
+  const d = content[lang];
+  document.documentElement.lang = lang;
+  document.documentElement.dir = d.dir;
+  document.body.className = d.dir === 'rtl' ? 'rtl' : '';
+
+  document.querySelectorAll('.lang-btn').forEach(b => {
+    b.classList.toggle('active', b.textContent.trim() === (lang === 'en' ? 'English' : 'فارسی'));
+  });
+
+  document.getElementById('backLink').textContent = d.back;
+  document.getElementById('tagRow').innerHTML = `<span class="tag">${d.tag}</span>`;
+  document.getElementById('title').textContent = d.title;
+  document.getElementById('metaRow').innerHTML = d.meta.map(m =>
+    `<div class="meta-item"><span>${m.label}</span><strong>${m.value}</strong></div>`).join('');
+
+  document.getElementById('body').innerHTML = d.sections.map((s, i) => `
+    <div class="section-label">${s.label}</div>
+    <div class="section-body">${s.body}</div>
+    ${i === 1 ? `
+    <div class="screens-gallery">
+      <figure>
+        <img src="parsnext.png" alt="Pars Next desktop screenshot">
+        <figcaption>${d.desktopCaption}</figcaption>
+      </figure>
+      <figure>
+        <img src="parsnext-mobile.png" alt="Pars Next mobile screenshot">
+        <figcaption>${d.mobileCaption}</figcaption>
+      </figure>
+    </div>` : ''}
+    ${i < d.sections.length - 1 ? '<div class="divider"></div>' : ''}
+  `).join('');
+
+  document.getElementById('footer').textContent = d.footer;
+}
+
+setLang('en');
+</script>
+</body>
+</html>
